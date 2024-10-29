@@ -5,13 +5,13 @@
         </h2>
     </x-slot>
 
-    <div class="py-6">
+    <div class="py-12 bg-gray-900">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
+            <div class="bg-gray-800 rounded-xl shadow-lg border border-gray-700">
+                <div class="p-6 sm:px-20  border-b border-gray-200">
 
                     <a href="{{ route('roles.index') }}"
-                        class="inline-flex items-center px-4 py-2 mb-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150 float-end">
+                        class="inline-flex items-center px-4 py-2 mb-2 bg-indigo-600 border border-transparent rounded-md text-2xl font-semibold text-gray-100  uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150 float-end">
                         {{ __('Roles list') }}
                     </a>
 
