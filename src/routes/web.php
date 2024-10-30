@@ -9,9 +9,14 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ContadorController;
 use App\Http\Controllers\PatientActivityController;
 
+
 Route::get('/', function () {
     return view('landing');
 })->name('landing');
+// Ruta para iniciar sesión
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
 
 Route::get('/contador', [ContadorController::class, 'index'])->name('contador');
 Route::get('/contador/incrementar/{número}', [ContadorController::class, 'incrementar'])->name('incrementar');

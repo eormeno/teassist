@@ -1,60 +1,54 @@
 <x-crud-layout>
     <x-slot name="title">Mostrar actividad del paciente</x-slot>
 
-    <a href="{{ route('patient-activities.index', ['patient_id' => $patientActivity->patient_id]) }}">
-        <div
-            class="inline-flex items-center px-4 py-2 mb-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-            </svg>
-        </div>
+    {{-- Botón para regresar a la lista de actividades --}}
+    <a href="{{ route('patient-activities.index', ['patient_id' => $patientActivity->patient_id]) }}" class="inline-flex items-center px-4 py-2 mb-4 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+        Volver a actividades
     </a>
-    <div class="mt-4">
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <div class="bg-white overflow-hidden shadow rounded-lg">
-                <div class="px-4 py-5 sm:px-6">
-                    <h3 class="text-lg font-medium leading-6 text-gray-900">Paciente</h3>
-                    <p class="mt-1 max-w -2xl text-sm text-gray-500">
-                        {{ $patientActivity->patient->apellidos }},
-                        {{ $patientActivity->patient->nombres }}</p>
-                </div>
-                <div class="px-4 py-5 sm:px-6">
-                    <h3 class="text-lg font-medium leading-6 text-gray-900">Actividad</h3>
-                    <p class="mt-1 max-w
-                    -2xl text-sm text-gray-500">
-                        {{ $patientActivity->activity->name }}</p>
-                </div>
 
-                <div class="border-t border-gray-200">
-                    <dl>
-                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-500">Descripción</dt>
-                            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2">
-                                {{ $patientActivity->description }}
-                            </dd>
-                        </div>
-                        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-500">Razones</dt>
-                            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2">
-                                {{ $patientActivity->reasons }}
-                            </dd>
-                        </div>
-                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-500">Objetivos</dt>
-                            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2">
-                                {{ $patientActivity->goals }}
-                            </dd>
-                        </div>
-                        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-500">Indicadores</dt>
-                            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2">
-                                {{ $patientActivity->indicators }}
-                            </dd>
-                        </div>
-                    </dl>
-                </div>
+    {{-- Información del paciente y la actividad --}}
+    <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6 mt-4">
+        <h3 class="text-lg font-semibold leading-6 text-gray-900 dark:text-gray-100">Detalles de la Actividad del Paciente</h3>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mt-4">
+            {{-- Paciente --}}
+            <div>
+                <h4 class="text-sm font-medium text-gray-600 dark:text-gray-400">Paciente</h4>
+                <p class="text-base font-semibold text-gray-900 dark:text-gray-200">
+                    {{ $patientActivity->patient->apellidos }}, {{ $patientActivity->patient->nombres }}
+                </p>
             </div>
+            {{-- Actividad --}}
+            <div>
+                <h4 class="text-sm font-medium text-gray-600 dark:text-gray-400">Actividad</h4>
+                <p class="text-base font-semibold text-gray-900 dark:text-gray-200">
+                    {{ $patientActivity->activity->name }}
+                </p>
+            </div>
+        </div>
+
+        {{-- Detalles de la actividad --}}
+        <div class="border-t border-gray-200 dark:border-gray-700 mt-6 pt-6">
+            <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div>
+                    <dt class="text-sm font-medium text-gray-600 dark:text-gray-400">Descripción</dt>
+                    <dd class="text-base text-gray-900 dark:text-gray-200">{{ $patientActivity->description }}</dd>
+                </div>
+                <div>
+                    <dt class="text-sm font-medium text-gray-600 dark:text-gray-400">Razones</dt>
+                    <dd class="text-base text-gray-900 dark:text-gray-200">{{ $patientActivity->reasons }}</dd>
+                </div>
+                <div>
+                    <dt class="text-sm font-medium text-gray-600 dark:text-gray-400">Objetivos</dt>
+                    <dd class="text-base text-gray-900 dark:text-gray-200">{{ $patientActivity->goals }}</dd>
+                </div>
+                <div>
+                    <dt class="text-sm font-medium text-gray-600 dark:text-gray-400">Indicadores</dt>
+                    <dd class="text-base text-gray-900 dark:text-gray-200">{{ $patientActivity->indicators }}</dd>
+                </div>
+            </dl>
         </div>
     </div>
 </x-crud-layout>

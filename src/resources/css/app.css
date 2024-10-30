@@ -5,3 +5,46 @@
 [x-cloak] {
     display: none;
 }
+.login-page {
+    background-color: #F7F9F9;
+
+
+}
+
+
+.login-page .container {
+    max-width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.login-page .form-input {
+    border-color: #005C53;
+}
+
+.login-page .form-button {
+    background-color: #1e1e49;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.login-page .form-button:hover {
+    background-color: #A7D3E0;
+    color: black;
+}
+
+.login-page .register-link {
+    color: #005C53;
+}
+
+.login-page .register-link:hover {
+    text-decoration: underline;
+}
+
+.login-page .alert {
+    color: red;
+    margin-bottom: 10px;
+}

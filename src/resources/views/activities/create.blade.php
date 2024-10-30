@@ -10,28 +10,30 @@
             </svg>
         </div>
     </a>
-
+    <x-validation-errors class="mb-4" />
     <form action="{{ route('activities.store') }}" method="POST" class="mt-2" novalidate
         enctype="multipart/form-data">
         @csrf
         <div class="mt-2">
-            <x-label for="name" value="Nombre" />
-            <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required
+            <x-label for="name" value="Nombre" class="font-semibold label-custom-blue"/>
+            <x-input id="name" class="block mt-1 w-full input-bg-white" type="text" name="name" :value="old('name')" required
                 autofocus autocomplete="name" />
+            <x-input-error for="name" class="mt-2" />
         </div>
         <div class="mt-2">
-            <x-label for="description" value="Descripción" />
-            <textarea name="description" id="description" cols="30" rows="3"
-                class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full"
+            <x-label for="description" value="Descripción" class="font-semibold label-custom-blue" />
+            <textarea name="description" id="description" cols="30" rows="5"
+                class="block mt-1 w-full input-bg-white"
                 required>{{ old('description') }}</textarea>
         </div>
         <div class="mb-3">
-            <x-label for="image" value="Imagen" />
-            <x-input id="image" class="block mt-1 w-full" type="file" name="image" :value="old('image')" required
+            <x-label for="image" value="Imagen" class="font-semibold label-custom-blue"/>
+            <x-input id="image" class="block mt-1 w-full input-bg-white" type="file" name="image" :value="old('image')" required
                 autocomplete="image" />
+            <x-input-error for="image" class="mt-2" />
         </div>
         <div class="flex items-center justify-end mt-4">
-            <x-button class="ms-4">Crear actividad</x-button>
+            <x-button class="btn-primary">Crear actividad</x-button>
         </div>
     </form>
 

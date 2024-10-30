@@ -1,4 +1,4 @@
-<x-event-layout>
+<x-crud-layout>
     <x-slot name="title">
         {{ __('Users Manager > Edit user') }}
     </x-slot>
@@ -45,4 +45,4 @@
             </div>
         </div>
     </div>
-</x-event-layout>
+</x-crud-layout>

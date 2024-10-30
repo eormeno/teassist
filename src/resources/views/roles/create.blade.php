@@ -1,4 +1,4 @@
-<x-event-layout>
+<x-crud-layout>
     <x-slot name="title">
         {{ __('Roles manager > Create') }}
     </x-slot>
@@ -43,4 +43,4 @@
             </div>
         </div>
     </div>
-</x-event-layout>
+</x-crud-layout>
