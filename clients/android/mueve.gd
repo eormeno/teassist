@@ -6,24 +6,14 @@ var speed = 600
 func _process(delta):
 	var direction = Vector2.ZERO
 
-	# Movimiento con las flechas del teclado
-	if Input.is_action_pressed("ui_right"):
+	# Movimiento con las teclas WASD y flechas del cursor
+	if Input.is_action_pressed("right"):
 		direction.x += 1
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("left"):
 		direction.x -= 1
-	if Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed("down"):
 		direction.y += 1
-	if Input.is_action_pressed("ui_up"):
-		direction.y -= 1
-
-	# Movimiento con las teclas WASD
-	if Input.is_action_pressed("move_right"):
-		direction.x += 1
-	if Input.is_action_pressed("move_left"):
-		direction.x -= 1
-	if Input.is_action_pressed("move_down"):
-		direction.y += 1
-	if Input.is_action_pressed("move_up"):
+	if Input.is_action_pressed("up"):
 		direction.y -= 1
 
 	# Normalizar la dirección para evitar movimiento más rápido en diagonal
