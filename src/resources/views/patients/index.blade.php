@@ -39,7 +39,7 @@
                         <td class="py-2 px-4 border-t">
                             <div class="flex items-center space-x-2">
                                 <a href="{{ route('patients.show', $patient->id) }}"
-                                    class="action-btn view-btn bg-[#A7D3E0] text-[#1E1E49] py-1 px-2 rounded inline-flex items-center justify-center w-8 h-8"
+                                    class="action-btn view-btn bg-[#a4c2db] text-[#1E1E49] py-1 px-2 rounded inline-flex items-center justify-center w-8 h-8"
                                     title="Ver">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -50,7 +50,7 @@
                                     </svg>
                                 </a>
                                 <a href="{{ route('patients.edit', $patient->id) }}"
-                                    class="action-btn edit-btn bg-[#EA9423] text-white py-1 px-2 rounded inline-flex items-center justify-center w-8 h-8"
+                                    class="action-btn edit-btn bg-[#0075b2] text-white py-1 px-2 rounded inline-flex items-center justify-center w-8 h-8"
                                     title="Editar">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -62,7 +62,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
-                                        class="delete-btn bg-red-600 text-white py-1 px-2 rounded inline-flex items-center justify-center w-8 h-8"
+                                        class="delete-btn bg-[#dbf227] text-white py-1 px-2 rounded inline-flex items-center justify-center w-8 h-8"
                                         title="Eliminar">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="w-5 h-5">

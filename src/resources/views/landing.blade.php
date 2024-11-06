@@ -158,7 +158,7 @@
         </section>
         <!-- Características Clave -->
         <section class="py-16 bg-gray-100 text-center">
-            <h3 class="text-3xl font-bold text-gray-800 mb-8">Descubre cómo TEApp beneficia a cada perfil de usuario
+            <h3 class="text-3xl font-bold text-gray-800 mb-8">Descubre cómo TEAssist beneficia a cada perfil de usuario
             </h3>
             <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 px-4">
                 <div
@@ -249,7 +249,7 @@
                 <h3 class="text-3xl font-bold text-[#1E1E49] text-center mb-4">Testimonios de Usuarios</h3>
                 <div class="flex justify-center">
                     <div class="bg-white border-2 border-[#1E1E49] p-4 rounded-lg shadow-md mx-2 w-full max-w-[300px]">
-                        <p class="text-gray-700 mb-1 text-xs">"TEApp ha revolucionado la manera en que manejo mis
+                        <p class="text-gray-700 mb-1 text-xs">"TEAssist ha revolucionado la manera en que manejo mis
                             pacientes."</p>
                         <h4 class="text-xs font-semibold text-gray-800">Dr. Juan Pérez, Médico</h4>
                     </div>
@@ -259,7 +259,7 @@
                         <h4 class="text-xs font-semibold text-gray-800">Lic. Ana García, Terapeuta</h4>
                     </div>
                     <div class="bg-white border-2 border-[#1E1E49] p-4 rounded-lg shadow-md mx-2 w-full max-w-[300px]">
-                        <p class="text-gray-700 mb-1 text-xs">"Gracias a TEApp, mi trabajo se ha vuelto más eficiente."
+                        <p class="text-gray-700 mb-1 text-xs">"Gracias a TEAssist, mi trabajo se ha vuelto más eficiente."
                         </p>
                         <h4 class="text-xs font-semibold text-gray-800">Ing. Roberto Gómez, Ingeniero</h4>
                     </div>
@@ -283,7 +283,7 @@
                     <a href="https://instagram.com" class="hover:text-gray-300"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-            <p class="text-center text-sm">&copy; 2024 TEApp. Todos los derechos reservados.</p>
+            <p class="text-center text-sm">&copy; 2024 TEAssist. Todos los derechos reservados.</p>
     </div>
     </footer>
 
