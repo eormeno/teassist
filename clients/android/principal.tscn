@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dt4lii04fw4y5"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchor_right = 0.39
+anchor_bottom = 0.414
+offset_right = -0.280029
+offset_bottom = -0.272034
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 472.0
+offset_bottom = 232.0
+
+[node name="Label" type="Label" parent="CenterContainer"]
+layout_mode = 2
+text = "Ventana principal"
