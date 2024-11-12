@@ -5,3 +5,12 @@
 [x-cloak] {
     display: none;
 }
+.carousel-item {
+    transition: opacity 0.5s ease;
+}
+
+.separador{
+    width: 90%;
+    height: 1rem;
+    background: linear-gradient(to left, theme('colors.azullogo') 33%, theme('colors.grislogo') 33% 66%, theme('colors.rojologo') 66%);
+    margin: auto;}
