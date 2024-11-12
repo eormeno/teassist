@@ -22,7 +22,7 @@ func _ready():
 func get_stored_code() -> String:
 	# Implement logic to retrieve code from local storage
 	var config = ConfigFile.new()
-	var err = config.load("user://stored_code.cfg")
+	var err = config.load("res://stored_code.cfg")
 	if err == OK:
 		return config.get_value("code", "value", "")
 	else:

@@ -15,4 +15,4 @@ func _on_button_pressed() -> void:
 func save_code(code: String) -> void:
 	var config = ConfigFile.new()
 	config.set_value("code", "value", code)
-	config.save("user://stored_code.cfg")
+	config.save("res://stored_code.cfg")
