@@ -4,3 +4,5 @@ mysql
 processes.txt
 # ignore all files in the 'godot' directory
 godot/*
+# ignore .vscode directory
+.vscode/*
