@@ -1,3 +1,3 @@
 <div>
-    <img src="{{ asset('images/app-logo.png') }}" alt="Logo" class="w-32 h-32" />
+    <img src="{{ asset('images/logo.jpg') }}" alt="Logo" class="mx-auto rounded"/>
 </div>
