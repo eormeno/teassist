@@ -10,8 +10,8 @@
                 <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
                     <div class="mt-4">
                         <a href="{{ route('users.create') }}"
-                            class="inline-flex items-center px-4 py-2 mb-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150">
-                            New User
+                        class="inline-flex items-center px-4 py-2 mb-2 bg-azullogo border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150">
+                        Nuevo Usuario
                         </a>
                         <div class="overflow-x-hidden">
                             <table class="min-w-full divide-y divide-gray-200">
@@ -49,7 +49,7 @@
                                             <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
                                                 <div class="flex items-center space-x-2">
                                                     <a href="{{ route('users.show', $user->id) }}"
-                                                        class="text-indigo-600 hover:text-indigo-900">
+                                                        class="text-azullogo hover:text-gray-500">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                             class="size-6">
@@ -60,7 +60,7 @@
                                                         </svg>
                                                     </a>
                                                     <a href="{{ route('users.edit', $user->id) }}"
-                                                        class="text-indigo-600 hover:text-indigo-900">
+                                                        class="text-azullogo hover:text-gray-500">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                             class="size-6">
@@ -73,7 +73,7 @@
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit">
-                                                            <div class="text-red-700 hover:text-red-900">
+                                                            <div class="text-rojologo hover:text-red-900">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                     viewBox="0 0 24 24" stroke-width="1.5"
                                                                     stroke="currentColor" class="size-6">

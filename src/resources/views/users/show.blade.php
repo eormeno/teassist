@@ -7,13 +7,15 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
+                    <a href="{{ route('patients.index') }}"
+                    class="inline-flex items-center px-4 py-2 mb-2 bg-azullogo border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150">
+                    Volver
+                </a>
                     <div class="row">
                         <div class="col-lg-12 margin-tb mb-4">
                             <div class="pull-left">
                                 <div class="float-end">
-                                    <x-button onclick="window.location='{{ route('users.index') }}'">
-                                        {{ __('Back') }}
-                                    </x-button>
+
                                 </div>
                             </div>
                         </div>

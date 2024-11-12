@@ -20,7 +20,7 @@
     @if ($patient_id)
         <a href="{{ route('patient-activities.create', ['patient_id' => $patient_id]) }}">
             <div
-                class="inline-flex items-center px-4 py-2 mb-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150">
+                class="inline-flex items-center px-4 py-2 mb-2 bg-azullogo border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -59,7 +59,7 @@
                                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
                                     <div class="flex items-center space-x-2">
                                         <a href="{{ route('patient-activities.show', $patient_activity) }}"
-                                            class="text-indigo-600 hover:text-indigo-900">
+                                            class="text-azullogo hover:text-gray-500">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="size-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -69,7 +69,7 @@
                                             </svg>
                                         </a>
                                         <a href="{{ route('patient-activities.edit', $patient_activity) }}"
-                                            class="text-indigo-600 hover:text-indigo-900">
+                                            class="text-azullogo hover:text-gray-500">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="size-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -81,7 +81,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit">
-                                                <div class="text-red-700 hover:text-red-900">
+                                                <div class="text-rojologo hover:text-red-900">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                         class="size-6">
