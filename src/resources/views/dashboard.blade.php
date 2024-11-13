@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="bg-gray-300 py-12">
+    <div class="py-12">
         <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="overflow-hidden sm:rounded-lg">
                 @role('registered')

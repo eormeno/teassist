@@ -49,7 +49,7 @@
                         <div class="mt-4">
                             <x-label for="options" style="color: #000000;" value="{{ __('Seleccionar Roles') }}" />
                             <select id="options" name="roles[]" multiple
-                                class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full">
+                                class=" bg-white text-indigo-800 focus:border-indigo-500  focus:ring-indigo-500  rounded-md shadow-sm block mt-1 w-80">
                                 @foreach ($roles as $role)
                                     <option value="{{ $role }}">{{ $role }}</option>
                                 @endforeach
