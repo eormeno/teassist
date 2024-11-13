@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Patient;
 use App\Models\Activity;
+use App\Traits\DebugHelper;
+use App\Traits\ToastTrigger;
 use App\Models\PatientActivity;
 use App\Http\Requests\StorePatientActivityRequest;
 use App\Http\Requests\UpdatePatientActivityRequest;
 
 class PatientActivityController extends Controller
 {
+    use DebugHelper, ToastTrigger;
     public function index() {
         $patient_id = request()->get('patient_id');
         $patients = Patient::all();
@@ -79,6 +82,7 @@ class PatientActivityController extends Controller
     public function destroy(PatientActivity $patientActivity)
     {
         $patientActivity->delete();
+        $this->successToast('Actividad de Usuario Eliminada con Exito');
         return redirect()->route('patient-activities.index', ['patient_id' => $patientActivity->patient_id]);
     }
 }

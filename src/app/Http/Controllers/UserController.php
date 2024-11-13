@@ -42,7 +42,7 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
 
         return redirect()->route('users.index')
-            ->with('success', 'User created successfully');
+            ->with('success', 'Usuario Creado con Exito');
     }
 
     public function show($id)
@@ -72,14 +72,14 @@ class UserController extends Controller
         DB::table('model_has_roles')->where('model_id', $id)->delete();
 
         $user->assignRole($request->input('roles'));
-        $this->infoToast('User updated successfully');
+        $this->infoToast('Usuario Actualizado');
         return redirect()->route('users.index');
     }
 
     public function destroy($id)
     {
         User::find($id)->delete();
-        $this->successToast('User deleted successfully');
+        $this->successToast('Usuario Eliminado con Exito');
         return redirect()->route('users.index');
     }
 }

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('patient_activities', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('patient_id')->constrained();
-            $table->foreignId('activity_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignId('patient_id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignId('activity_id')->nullable()->constrained()->onDelete('cascade');
             $table->boolean('active')->default(false);
             $table->text('description')->nullable();
             $table->text('reasons')->nullable();

@@ -45,7 +45,7 @@ class RoleController extends Controller implements HasMiddleware
         ]);
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permission'));
-        $this->successToast('Role created successfully');
+        $this->successToast('Rol Creado con Exito');
         return redirect()->route('roles.index');
     }
 
@@ -79,14 +79,14 @@ class RoleController extends Controller implements HasMiddleware
         $role->name = $request->input('name');
         $role->save();
         $role->syncPermissions($request->input('permission'));
-        $this->successToast('Role updated successfully');
+        $this->successToast('Rol Actualizado');
         return redirect()->route('roles.index');
     }
 
     public function destroy($id)
     {
         DB::table("roles")->where('id', $id)->delete();
-        $this->successToast('Role deleted successfully');
+        $this->successToast('Rol Eliminado con Exito');
         return redirect()->route('roles.index');
     }
 }

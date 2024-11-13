@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Traits\DebugHelper;
+use App\Traits\ToastTrigger;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 use App\Http\Requests\PatientRequest;
 
 class PatientController extends Controller
 {
+    use DebugHelper, ToastTrigger;
     /**
      * Display a listing of the resource.
      */
@@ -73,9 +77,10 @@ class PatientController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Patient $patient)
+    public function destroy($id)
     {
-        $patient->delete();
+        Patient::find($id)->delete();
+        $this->successToast('Paciente Eliminado con Exito');
         return redirect()->route('patients.index');
     }
 }

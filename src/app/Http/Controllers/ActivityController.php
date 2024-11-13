@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Utils\ImageUtils;
+use App\Traits\DebugHelper;
+use App\Traits\ToastTrigger;
 use App\Http\Requests\StoreActivityRequest;
 use App\Http\Requests\UpdateActivityRequest;
-use App\Traits\DebugHelper;
-use App\Utils\ImageUtils;
 use Intervention\Image\Laravel\Facades\Image;
 
 class ActivityController extends Controller
 {
-    use DebugHelper;
+    use DebugHelper, ToastTrigger;
 
     /**
      * Display a listing of the resource.
@@ -91,6 +92,7 @@ class ActivityController extends Controller
     public function destroy(Activity $activity)
     {
         $activity->delete();
+        $this->successToast('Actividad Eliminada con Exito');
         return redirect()->route('activities.index');
     }
 }
