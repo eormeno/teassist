@@ -10,8 +10,17 @@ use App\Http\Controllers\ContadorController;
 use App\Http\Controllers\PatientActivityController;
 
 Route::get('/', function () {
-    return view('landing');
-})->name('landing');
+    return view('index');
+})->name('index');
+Route::get('/index/tea', function () {
+    return view('tea');
+})->name('index.tea');
+Route::get('/index/nosotros', function () {
+    return view('nosotros');
+})->name('index.nosotros');
+Route::get('/index/login', function () {
+    return view('auth.login');
+})->name('index.login');
 
 Route::get('/contador', [ContadorController::class, 'index'])->name('contador');
 Route::get('/contador/incrementar/{número}', [ContadorController::class, 'incrementar'])->name('incrementar');

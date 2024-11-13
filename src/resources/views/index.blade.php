@@ -72,7 +72,7 @@
             <div class="lg:w-1/2 space-y-6 text-center lg:text-left">
                 <h1 class="text-4xl sm:text-5xl font-bold">TeApp</h1>
                 <p class="text-lg">Es una app especializada para personas con trastorno de espectro autista, empieza ahora</p>
-                <button class="bg-[#A0A8FF] text-white px-6 py-3 rounded-md text-lg hover:bg-[#4172A9] transition">Comencemos</button>
+                <button onclick="location.href='{{ route('index.login')}}'" class="bg-[#A0A8FF] text-white px-6 py-3 rounded-md text-lg hover:bg-[#4172A9] transition">Comencemos</button>
             </div>
 
             <!-- Contenedor de la imagen -->

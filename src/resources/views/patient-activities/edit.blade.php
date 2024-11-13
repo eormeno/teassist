@@ -1,15 +1,12 @@
 <x-crud-layout>
     <x-slot name="title">Modificar actividad de {{ $patient_full_name }}</x-slot>
 
-    <a href="{{ route('patient-activities.index', ['patient_id' => $patientActivity->patient_id]) }}">
-        <div
-            class="inline-flex items-center px-4 py-2 mb-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-            </svg>
-        </div>
-    </a>
+    <x-button onclick="location.href='{{ route('patient-activities.index', ['patient_id' => $patientActivity->patient_id]) }}'" class="inline-flex items-center px-4 py-2 mb-2 font-semibold text-xs disabled:opacity-25 transition ease-in-out duration-150">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+    </x-button>
     {{-- información de la actividad --}}
     <div class="mt-2 border border-gray-200 dark:border-gray-700 rounded-md p-4 shadow-md">
         <x-label for="activity_id" value="Actividad" />

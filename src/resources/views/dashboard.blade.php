@@ -8,6 +8,14 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden sm:rounded-lg">
+                <x-button onclick="location.href='{{ route('index')}}'"
+                    class="inline-flex items-center px-6 py-2 m-6 rounded-md font-semibold text-xs transition ease-in-out duration-150">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                    </svg>
+                        Volver a la página
+                </x-button>
                 @role('registered')
                     <div class="m-4 text-xl text-gray-600 dark:text-gray-200">
                         <b>Usted está registrado en el sistema.</b><br> Para poder acceder a funcionalidades

@@ -9,10 +9,9 @@
                 <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
                     <div class="mt-4">
                         @can('role-create')
-                            <a href="{{ route('roles.create') }}"
-                                class="inline-flex items-center px-4 py-2 mb-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150 float-end">
+                            <x-button onclick="location.href='{{ route('roles.create') }}'" class="inline-flex items-center px-4 py-2 mb-2 font-semibold text-xs disabled:opacity-25 transition ease-in-out duration-150">
                                 Nuevo rol
-                            </a>
+                            </x-button>
                         @endcan
                         <div class="overflow-x-auto">
                             <table class="min-w-full divide-y divide-gray-200">
