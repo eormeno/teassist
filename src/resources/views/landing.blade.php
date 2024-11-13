@@ -8,9 +8,9 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="font-sans antialiased dark:bg-black dark:text-white/50">
-    <header class="bg-green-500 text-white p-4 border rounded-lg shadow-xl m-3">
-        <div class="container mx-auto px-4">
+<body class="font-poppins bg-white dark:text-black">
+    <header class="bg-blue-500 text-white p-4 border rounded-lg shadow-xl m-3">
+        <div class="container mx-auto px-4 flex">
             <h1 class="text-3xl font-bold">Software para Personas con Diagnóstico de Autismo</h1>
             @if (Route::has('login'))
                 <nav class="-mx-3 flex flex-1 justify-end">
@@ -93,7 +93,7 @@
         </section>
 
         <section class="bg-blue-100 p-6 rounded-lg">
-            <h2 class="text-2xl font-semibold mb-4">Contáctenos</h2>
+            <h2 class="text-2xl font-semibold mb-3m">Contáctenos</h2>
             <p>Para más información sobre nuestro software o para solicitar una demostración, por favor contáctenos:</p>
             <a href="mailto:info@autismosoftware.com" class="text-blue-600 hover:underline">info@autismosoftware.com</a>
         </section>
