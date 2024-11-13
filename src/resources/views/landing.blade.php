@@ -173,7 +173,7 @@
         <div class="separador"></div>
         <br><br>
         <br><br>
-        <section class="bg-blue-100 p-6 rounded-lg container mx-auto text-center">
+        <section id="contacto" class="bg-blue-100 p-6 rounded-lg container mx-auto text-center">
             <h2 class="text-5xl font-bold mb-8 text-rojologo">Contáctenos</h2>
             <div>
             <div class="mt-5" >
