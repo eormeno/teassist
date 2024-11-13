@@ -77,7 +77,7 @@
 
             <!-- Contenedor de la imagen -->
             <div class="lg:w-1/2">
-                <img src="{{ asset('images/chica.jpeg') }}" alt="Ilustración de una persona con flores en la cabeza" class="max-w-full h-auto mx-auto">
+                <img src="{{ asset('images/chicaFlor-Photoroom.jpeg') }}" alt="Ilustración de una persona con flores en la cabeza" class="max-w-full h-auto mx-auto">
             </div>
         </div>
     </main>
