@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b72gjjvdpc3nj"]
+
+[ext_resource type="Texture2D" uid="uid://udtefyw5n7uj" path="res://icon.svg" id="1_630km"]
+[ext_resource type="Script" path="res://mueve.gd" id="2_lybsp"]
+
+[node name="Icon" type="Sprite2D"]
+position = Vector2(367, 250)
+texture = ExtResource("1_630km")
+script = ExtResource("2_lybsp")
+speed = 500
+rotation_speed = 5

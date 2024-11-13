@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://cn8yx6nr5dgu7"]
+
+[ext_resource type="Script" path="res://main_scene.gd" id="1_aqu8j"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aqu8j")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 546.0
+offset_top = 314.0
+offset_right = 586.0
+offset_bottom = 337.0
+text = "ESCENA PRINCIPAL"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
