@@ -1,0 +1,5 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1731445113
+icon.svg::CompressedTexture2D::1411131072793284153::1730921090::1730923191::1::::<><>::
+icon.tscn::PackedScene::4688582758879000915::1730921090::0::1::::<><>::uid://udtefyw5n7uj::::res://icon.svg<>res://mueve.gd
+mueve.gd::GDScript::-1::1730921090::0::1::::<>Sprite2D<>::

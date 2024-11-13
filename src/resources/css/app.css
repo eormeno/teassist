@@ -5,30 +5,48 @@
 [x-cloak] {
     display: none;
 }
+
 .login-page {
+    position: relative;
     background-color: #F7F9F9;
 
-
+    z-index: 10;
 }
+
 
 
 .login-page .container {
-    max-width: 400px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    max-width: 450px;
     margin: 0 auto;
     padding: 20px;
-    background-color: white;
+    position: relative;
+    z-index: 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    overflow: visible; /* Permite que el contenido se desborde */
+}
+
+.login-page .form-group {
+
+    padding: 20px;
     border-radius: 10px;
+
+    position: relative;
+
+
 }
 
 .login-page .form-input {
-    border-color: #005C53;
+    border-color: #1e1e49;
+    position: relative;
+
 }
 
 .login-page .form-button {
     background-color: #1e1e49;
     color: white;
     transition: background-color 0.3s;
+    position: relative;
+    z-index: 0;
 }
 
 .login-page .form-button:hover {
@@ -37,7 +55,9 @@
 }
 
 .login-page .register-link {
-    color: #005C53;
+    color: #1e1e49;
+    position: relative;
+    z-index: 0;
 }
 
 .login-page .register-link:hover {
@@ -47,4 +67,16 @@
 .login-page .alert {
     color: red;
     margin-bottom: 10px;
+    position: relative;
+    z-index: 0;
+}
+
+
+/* En pantallas pequeñas */
+@media (max-width: 768px) {
+    .login-page {
+
+        background-position: -110px 270px;  /* Ajuste para pantallas pequeñas */
+        background-size: 250%;  /* Aumenta ligeramente el tamaño de la imagen para que cubra mejor */
+    }
 }

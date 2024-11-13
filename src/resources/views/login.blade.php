@@ -9,7 +9,8 @@
 
 </head>
 
-<body class="flex flex-col items-center justify-center min-h-screen login-page" style="background-image: url('{{ asset('images/patron.png') }}');">
+<body class=" login-page" style="background-image: url('{{ asset('images/patron.png') }}');">
+
 
     <!-- Encabezado -->
     <header class="flex flex-col items-center mb-6">
@@ -39,7 +40,7 @@
                 <button type="submit" class="form-button w-full p-2 rounded">Iniciar Sesión</button>
             </form>
             <div class="text-center mt-4">
-                <a href="#" class="text-sm text-[#005C53]">¿Olvidaste tu contraseña?</a>
+                <a href="#" class="text-sm text-[#1e1e49]">¿Olvidaste tu contraseña?</a>
             </div>
             <div class="text-center mt-4">
                 <p class="text-gray-600 text-sm">¿No tienes una cuenta?
