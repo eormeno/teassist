@@ -1,56 +1,68 @@
-<x-crud-layout>
-    <x-slot name="title">Nueva actividad al paciente {{ $patient_full_name }} </x-slot>
+<x-crud-layout class="bg-gray-900">
+    <x-slot name="title">
+        <h1 class="text-2xl font-bold text-gray-100">Nueva actividad al paciente {{ $patient_full_name }}</h1>
+    </x-slot>
 
-    <a href="{{ route('patient-activities.index', ['patient_id' => $patient_id]) }}">
-        <div
-            class="inline-flex items-center px-4 py-2 mb-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-            </svg>
-        </div>
+    {{-- Back Button --}}
+    <a href="{{ route('patient-activities.index', ['patient_id' => $patient_id]) }}"
+        class="inline-flex items-center px-4 py-2 mb-6 bg-gray-800 border border-gray-700 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150 ease-in-out group">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-5 h-5 mr-2 group-hover:transform group-hover:-translate-x-1 transition-transform">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        <span class="text-sm font-medium">Volver</span>
     </a>
-    <form action="{{ route('patient-activities.store', ['patient_id' => $patient_id]) }}" method="POST" class="mt-2" novalidate
-        enctype="multipart/form-data">
+
+    <form action="{{ route('patient-activities.store', ['patient_id' => $patient_id]) }}"
+          method="POST"
+          class="space-y-6 bg-gray-800 p-6 rounded-xl shadow-xl"
+          novalidate
+          enctype="multipart/form-data">
         @csrf
-        <!-- A selection of activities -->
-        <div class="mb-4">
-            <label for="activity_id" class="block text-ellipsis text-sm font-medium text-gray-700">Actividad</label>
-            <select id="activity_id" name="activity_id"
-                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                required>
-                <option value="">Seleccionar actividad</option>
+
+        {{-- Activity Selection --}}
+        <div>
+            <label for="activity_id" class="block text-sm font-medium text-gray-300 mb-2">
+                Actividad
+            </label>
+            <select id="activity_id"
+                    name="activity_id"
+                    class="w-full bg-gray-700 border-gray-600 text-gray-200 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out"
+                    required>
+                <option value="" class="bg-gray-700">Seleccionar actividad</option>
                 @foreach ($activities as $activity)
-                    <option value="{{ $activity->id }}">{{ $activity->name }}</option>
+                    <option value="{{ $activity->id }}" class="bg-gray-700">{{ $activity->name }}</option>
                 @endforeach
             </select>
         </div>
-        <div class="mt-2">
-            <x-label for="description" value="Descripción" />
-            <textarea name="description" id="description" cols="30" rows="2"
-                class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full"
-                required>{{ old('description') }}</textarea>
-        </div>
-        <div class="mt-2">
-            <x-label for="reasons" value="Razones" />
-            <textarea name="reasons" id="reasons" cols="30" rows="2"
-                class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full"
-                required>{{ old('reasons') }}</textarea>
-        </div>
-        <div class="mt-2">
-            <x-label for="goals" value="Objetivos" />
-            <textarea name="goals" id="goals" cols="30" rows="2"
-                class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full"
-                required>{{ old('goals') }}</textarea>
-        </div>
-        <div class="mt-2">
-            <x-label for="indicators" value="Indicadores" />
-            <textarea name="indicators" id="indicators" cols="30" rows="2"
-                class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full"
-                required>{{ old('indicators') }}</textarea>
-        </div>
-        <div class="flex items-center justify-end mt-4">
-            <x-button class="ms-4">Asignar actividad</x-button>
+
+        {{-- Text Areas --}}
+        @foreach ([
+            'description' => 'Descripción',
+            'reasons' => 'Razones',
+            'goals' => 'Objetivos',
+            'indicators' => 'Indicadores'
+        ] as $field => $label)
+            <div>
+                <label for="{{ $field }}" class="block text-sm font-medium text-gray-300 mb-2">
+                    {{ $label }}
+                </label>
+                <textarea
+                    id="{{ $field }}"
+                    name="{{ $field }}"
+                    rows="3"
+                    class="w-full bg-gray-700 border-gray-600 text-gray-200 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out resize-none"
+                    required
+                >{{ old($field) }}</textarea>
+            </div>
+        @endforeach
+
+        {{-- Submit Button --}}
+        <div class="flex justify-end">
+            <button type="submit"
+                    class="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-150 ease-in-out">
+                Asignar actividad
+            </button>
         </div>
     </form>
 </x-crud-layout>
