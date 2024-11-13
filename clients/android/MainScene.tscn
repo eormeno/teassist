@@ -11,12 +11,27 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_aqu8j")
 
-[node name="Label" type="Label" parent="."]
+[node name="Nombres" type="Label" parent="."]
 layout_mode = 0
-offset_left = 546.0
-offset_top = 314.0
-offset_right = 586.0
-offset_bottom = 337.0
+offset_left = 46.0
+offset_top = 30.0
+offset_right = 192.0
+offset_bottom = 53.0
+text = "ESCENA PRINCIPAL"
+
+[node name="Apellidos" type="Label" parent="."]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 64.0
+offset_right = 193.0
+offset_bottom = 87.0
 text = "ESCENA PRINCIPAL"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 103.0
+offset_right = 92.0
+offset_bottom = 143.0
