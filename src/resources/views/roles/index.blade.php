@@ -1,29 +1,31 @@
 <x-event-layout>
     <x-slot name="title">
-        {{ __('Roles manager') }}
+        {{ __('Manejo de Roles') }}
     </x-slot>
 
-    <div class="py-6">
+    <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
-                    <div class="mt-4">
+                <div class="p-6 sm:px-20 bg-gray-300 border-b border-indigo-300">
+                    <div class="mt-0 pt-0 p-5">
                         @can('role-create')
                             <a href="{{ route('roles.create') }}"
-                                class="inline-flex items-center px-4 py-2 mb-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150 float-end">
+                                class="inline-flex items-center px-4 py-2 mb-2 bg-green-600 border border-transparent rounded-md font-semibold text-medium text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:ring ring-green-300 disabled:opacity-25 transition ease-in-out duration-150 float-end">
                                 Nuevo rol
                             </a>
                         @endcan
+                    </div>
+                    <div class="mt-8">
                         <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
+                            <table class="min-w-full divide-y divide-indigo-100">
+                                <thead class="bg-indigo-700">
                                     <tr>
                                         <th scope="col"
-                                            class="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-                                            Name</th>
+                                            class="px-4 py-3 text-left text-xs font-extrabold text-white uppercase tracking-wider">
+                                            Nombre</th>
                                         <th scope="col"
-                                            class="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-                                            Actions</th>
+                                            class="px-4 py-3 text-left text-xs font-extrabold text-white uppercase tracking-wider">
+                                            Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
@@ -35,7 +37,7 @@
                                                 <div class="flex items-center space-x-2">
                                                     @if ($role->name !== 'root')
                                                         <a href="{{ route('roles.show', $role->id) }}"
-                                                            class="text-indigo-600 hover:text-indigo-900">
+                                                            class="text-orange-400 hover:text-indigo-900">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5"
                                                                 stroke="currentColor" class="size-6">
@@ -46,7 +48,7 @@
                                                             </svg>
                                                         </a>
                                                         <a href="{{ route('roles.edit', $role->id) }}"
-                                                            class="text-indigo-600 hover:text-indigo-900">
+                                                            class="text-green-600 hover:text-indigo-900">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5"
                                                                 stroke="currentColor" class="size-6">

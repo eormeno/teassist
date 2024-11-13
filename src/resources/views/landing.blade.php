@@ -1,109 +1,122 @@
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TEAssist</title>
-    @vite('resources/css/app.css')
+    <title>TEApp</title>
+    @vite('resources/css/landing.css')
 </head>
 
-<body class="font-sans antialiased dark:bg-black dark:text-white/50">
-    <header class="bg-green-500 text-white p-4 border rounded-lg shadow-xl m-3">
-        <div class="container mx-auto px-4">
-            <h1 class="text-3xl font-bold">Software para Personas con Diagnóstico de Autismo</h1>
+<body class="font-sans bg-gray-50 text-gray-900">
+    <!-- Header -->
+    <header class=" text-red-400 py-6 shadow-lg ">
+        <div class="container mx-auto flex justify-between items-center px-3">
+            <img src="{{ asset('images/autis3.jpeg') }}" class="w-50 h-20 float-start" alt="logo">
+            <h1 class="text-4xl font-extrabold">Software para Personas con Diagnóstico de Autismo</h1>
             @if (Route::has('login'))
-                <nav class="-mx-3 flex flex-1 justify-end">
+                <nav class="flex flex-wrap justify-between items-center space-y-4 lg:space-y-0 lg:space-x-10">
                     @auth
                         <a href="{{ url('/dashboard') }}"
-                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                            class="font-extrabold bg-blue-800 text-white rounded-md px-5 py-3 transition hover:bg-blue-500 shadow-md">
                             Panel
                         </a>
                     @else
                         <a href="{{ route('login') }}"
-                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#477c92] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                            class="font-extrabold bg-blue-800 text-white rounded-md px-5 py-3 transition hover:bg-blue-500 shadow-md">
                             Ingresar
                         </a>
-
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#477c92] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                class="font-extrabold bg-green-800 text-white rounded-md px-5 py-3 transition hover:bg-green-500 shadow-md">
                                 Registrarse
                             </a>
                         @endif
                     @endauth
                 </nav>
+            
             @endif
         </div>
     </header>
-
-    <main class="container mx-auto px-4 py-8">
-        <section class="mb-12">
-            <h2 class="text-2xl font-semibold mb-4">¿Qué es el Trastorno del Espectro Autista (TEA)?</h2>
-            <p class="mb-4">El Trastorno del Espectro Autista (TEA) es una condición caracterizada por presentar
-                variables alteraciones con un impacto de por vida. Estas manifestaciones son muy variables entre
-                individuos y a través del tiempo, acorde al crecimiento y maduración de las personas.</p>
-            <img src="images/image_1.jpeg" alt="Representación del espectro autista" class="rounded-lg shadow-lg mb-4">
+    <!-- Sección de información sobre el Trastorno del Espectro Autista -->
+    <div class="relative flex justify-center items-center">
+        <!-- Imagen de fondo -->
+        <img src="{{ asset('images/autis3.jpeg') }}" style="height:60%; width:30%;" class="absolute" alt="Imagen de fondo">
+    
+        <!-- Sección con contenido superpuesto -->
+        <section class="relative max-w-4xl mx-auto p-6 my-12 bg-red-200 bg-opacity-90 shadow-md rounded-lg z-10">
+            <h1 class="text-3xl font-extrabold text-center text-blue-700">Trastorno del Espectro Autista (TEA)</h1>
+            <p class="font-bold mt-6 text-lg leading-relaxed">
+                El Trastorno del Espectro Autista (TEA) es una condición neurobiológica que afecta la comunicación, la interacción social y el comportamiento. El espectro es amplio, lo que significa que las personas con TEA pueden tener una variedad de habilidades y desafíos, desde dificultades leves hasta necesidades de apoyo significativas. Algunas características incluyen la dificultad para entender señales sociales, comportamientos repetitivos, y un enfoque intenso en intereses específicos.
+            </p>
+            <p class="font-bold mt-4 text-lg leading-relaxed">
+                Aunque las personas con TEA enfrentan desafíos, muchas de ellas desarrollan estrategias para vivir de manera independiente y alcanzar sus objetivos con el apoyo adecuado. La intervención temprana, las terapias personalizadas y el apoyo de la comunidad son fundamentales para mejorar la calidad de vida de quienes viven con TEA.
+            </p>
         </section>
-
-        <section class="mb-12">
-            <h2 class="text-2xl font-semibold mb-4">Características del Autismo</h2>
-            <ul class="list-disc pl-6 mb-4">
-                <li>Dificultades en la comunicación</li>
-                <li>Dificultades en las interacciones sociales</li>
-                <li>Intereses restringidos</li>
-                <li>Repetición de comportamientos</li>
-                <li>Sensibilidad sensorial</li>
-                <li>Dificultades con el cambio</li>
-                <li>Habilidades excepcionales en áreas específicas</li>
-            </ul>
-            <img src="images/image_2.jpeg" alt="Ilustración de características del autismo"
-                class="rounded-lg shadow-lg mb-4">
+    </div>
+    
+    <!-- Sección de enlace a APADEA -->
+    <div class="relative flex justify-center items-center">
+        <!-- Imagen de fondo -->
+        <img src="{{ asset('images/autis3.jpeg') }}" style="height:60%; width:30%;" class="absolute" alt="Imagen de fondo">
+        <!-- Sección con contenido superpuesto -->
+        <section class="relative max-w-4xl mx-auto p-6 my-12 bg-blue-200 bg-opacity-90 shadow-md rounded-lg z-10">
+            <h2 class="text-2xl font-extrabold text-center text-red-700">Conoce más sobre APADEA</h2>
+            <p class="font-bold mt-4 text-lg text-center">
+                APADEA es la Asociación Argentina de Padres de Autistas, una organización dedicada a brindar apoyo, orientación y recursos a las familias de personas con Trastorno del Espectro Autista en Argentina.
+            </p>
+            <div class="text-center mt-6">
+                <a href="https://apadea.org.ar/" target="_blank" class="text-white bg-blue-600 hover:bg-blue-700 font-bold py-3 px-6 rounded-lg transition-colors">
+                    Visita el sitio web de APADEA
+                </a>
+            </div>
         </section>
+    </div>
+    
+    <div class="relative  flex  justify-center items-center">
 
-        <section class="mb-12">
-            <h2 class="text-2xl font-semibold mb-4">Nuestro Software</h2>
-            <p class="mb-4">Desarrollamos un software especializado para ayudar a personas con Trastorno del Espectro
-                Autista (TEA). Nuestro objetivo es proporcionar una herramienta que facilite la inclusión y mejore la
-                calidad de vida de las personas con TEA.</p>
-            <h3 class="text-xl font-semibold mb-2">Características del Software:</h3>
-            <ul class="list-disc pl-6 mb-4">
-                <li>Interfaz amigable e intuitiva</li>
-                <li>Personalización según necesidades individuales</li>
-                <li>Comunicación visual</li>
-                <li>Estructura y rutina claras</li>
-                <li>Accesibilidad en diferentes dispositivos</li>
-                <li>Colaboración con expertos en TEA</li>
-                <li>Privacidad y seguridad garantizadas</li>
-                <li>Actualizaciones y soporte continuo</li>
-            </ul>
-            <img src="images/image_3.jpeg" alt="Captura de pantalla del software" class="rounded-lg shadow-lg mb-4">
+        <!-- Imagen de fondo -->
+        <img src="{{ asset('images/autis3.jpeg') }}" style="height:60%; width:30%;" class="absolute" alt="Imagen de fondo">
+    
+        <!-- Sección con contenido superpuesto -->
+        <section class="relative max-w-4xl mx-auto p-6 my-12 bg-green-200 bg-opacity-90 shadow-md rounded-lg z-10">
+            <h2 class="text-2xl font-extrabold text-center text-yellow-700">Preguntas Frecuentes sobre el Espectro Autista</h2>
+            <div class="mt-6">
+                <div class="mb-4">
+                    <h3 class="text-xl font-bold text-blue-500">¿Qué es el Trastorno del Espectro Autista (TEA)?</h3>
+                    <p class="font-bold mt-2 text-lg">
+                        El TEA es una condición del desarrollo que afecta cómo las personas perciben y socializan con otros, lo que provoca problemas en la interacción social y la comunicación. También incluye comportamientos repetitivos.
+                    </p>
+                </div>
+                <div class="mb-4">
+                    <h3 class="text-xl font-bold text-red-500">¿Qué tan común es el TEA?</h3>
+                    <p class="font-bold mt-2 text-lg">
+                        Se estima que 1 de cada 54 niños es diagnosticado con TEA, lo que lo convierte en uno de los trastornos de desarrollo más comunes.
+                    </p>
+                </div>
+                <div class="mb-4">
+                    <h3 class="text-xl font-bold text-pink-500">¿Existen tratamientos para el TEA?</h3>
+                    <p class="font-bold mt-2 text-lg">
+                        Si bien no existe una cura para el TEA, las terapias conductuales, ocupacionales, del habla y otras intervenciones pueden ayudar a mejorar las habilidades y el desarrollo de una persona.
+                    </p>
+                </div>
+                <div class="mb-4">
+                    <h3 class="text-xl font-bold text-red-900">¿El TEA afecta solo a los niños?</h3>
+                    <p class="font-bold mt-2 text-lg">
+                        No, el TEA es una condición de por vida. Si bien el diagnóstico generalmente ocurre en la infancia, muchas personas con TEA continúan enfrentando desafíos durante la adolescencia y la edad adulta.
+                    </p>
+                </div>
+            </div>
         </section>
+    </div>
+    
 
-        <section class="mb-12">
-            <h2 class="text-2xl font-semibold mb-4">Beneficios de Nuestro Software</h2>
-            <ul class="list-disc pl-6 mb-4">
-                <li>Desarrollo de habilidades cognitivas, emocionales y motrices</li>
-                <li>Fomento de actividades interactivas para mejorar relaciones interpersonales</li>
-                <li>Complemento a la intervención terapéutica tradicional</li>
-                <li>Contenido adaptable y personalizable</li>
-                <li>Retroalimentación inmediata y seguimiento del progreso</li>
-            </ul>
-            <img src="images/image_4.jpeg" alt="Personas utilizando el software" class="rounded-lg shadow-lg mb-4">
-        </section>
-
-        <section class="bg-blue-100 p-6 rounded-lg">
-            <h2 class="text-2xl font-semibold mb-4">Contáctenos</h2>
-            <p>Para más información sobre nuestro software o para solicitar una demostración, por favor contáctenos:</p>
-            <a href="mailto:info@autismosoftware.com" class="text-blue-600 hover:underline">info@autismosoftware.com</a>
-        </section>
-    </main>
-
-    <footer class="bg-gray-800 text-white py-4 mt-12">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2024 Software para Personas con Diagnóstico de Autismo. Todos los derechos reservados.</p>
+    <!-- Footer -->
+    <footer class="text-red-400 py-6 mt-12 shadow-xl bg-gray-200">
+        <div class="container mx-auto text-center font-extrabold">            
+            <p>&copy; 2024 Software para Personas con Diagnóstico de Autismo. Todos los derechos reservados. Emanuel Pintor.</p>
         </div>
-    </footer>
+    </footer>    
 </body>
-
 </html>

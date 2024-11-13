@@ -5,18 +5,18 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden sm:rounded-lg">
+    <div class="bg-gray-300 py-12">
+        <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="overflow-hidden sm:rounded-lg">
                 @role('registered')
-                    <div class="m-4 text-xl text-gray-600 dark:text-gray-200">
+                    <div class="m-4 text-xl text-black ">
                         <b>Usted está registrado en el sistema.</b><br> Para poder acceder a funcionalidades
                          específicas, debe dirigirse personalmente al área de administración de la
                          organización.
                     </div>
                 @endrole
                 @role('root')
-                    <div class="m-4 text-xl text-gray-600 dark:text-gray-200">
+                    <div class="m-4 text-xl text-black">
                         <b>Usted es usuario raíz.</b><br> Puede acceder a todas las funcionalidades del sistema.
                     </div>
                 @else

@@ -16,6 +16,10 @@ Route::get('/', function () {
 Route::get('/contador', [ContadorController::class, 'index'])->name('contador');
 Route::get('/contador/incrementar/{número}', [ContadorController::class, 'incrementar'])->name('incrementar');
 Route::get('/contador/decrementar/{número}', [ContadorController::class, 'decrementar'])->name('decrementar');
+Route::get('/contador/duplicar/{número}', [ContadorController::class, 'duplicar'])->name('duplicar');
+Route::get('/contador/resetear', [ContadorController::class, 'resetear'])->name('resetear');
+Route::post('/contador/reestablecer', [ContadorController::class, 'reestablecer'])->name('reestablecer');
+
 Route::resource('patients', PatientController::class)->middleware('auth');
 Route::resource('activities', ActivityController::class)->middleware('auth');
 Route::resource('patient-activities', PatientActivityController::class);
