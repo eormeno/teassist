@@ -66,7 +66,7 @@
     <header class="bg-white shadow-md w-full">
         <nav class="max-w-6xl mx-auto px-4 py-6">
             <div class="flex justify-between items-center">
-                <img src="{{ asset('images/app-logo.png') }}" alt="TeApp Logo" class="w-16 h-16 object-contain lg:order-1">
+                <img src="{{ asset('images/TeAssist(1).png') }}" alt="TeAssist Logo" class="w-1/10 h-1/10 object-contain lg:order-1">
                 <div class="lg:hidden">
                     <button id="menu-toggle" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600">
                         <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
@@ -93,10 +93,8 @@
                     <a href="{{ route('index')}}" class="text-gray-700 text-lg">Home</a>
                     <a href="{{ route('index.tea')}}" class="text-[#4172A9] text-lg font-bold">Infórmate</a>
                     <a href="{{ route('index.nosotros')}}" class="text-gray-700 text-lg">Nosotros</a>
-                    <div class="space-y-2 w-full max-w-[200px]">
                         <x-button onclick="location.href='{{ route('index.login')}}'" class="border-2 border-[#A0A8FF] text-[#A0A8FF] px-5 py-3 rounded-md hover:bg-[#A0A8FF] hover:text-white transition duration-300">Iniciar Sesión</x-button>
                         <x-button onclick="location.href='{{ route('index.login')}}'" class="border-2 border-[#A0A8FF] text-[#A0A8FF] px-5 py-3 rounded-md hover:bg-[#A0A8FF] hover:text-white transition duration-300">Registrarse</x-button>
-                    </div>
                 </div>
             </div>
         </nav>

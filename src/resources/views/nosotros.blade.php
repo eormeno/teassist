@@ -38,6 +38,11 @@
         .menu-transition {
             transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
+        .size-1-10 {
+            width: 10%;
+            height: auto;
+        }
+
     </style>
 </head>
 
@@ -45,7 +50,7 @@
     <header class="bg-white shadow-md w-full">
         <nav class="max-w-6xl mx-auto px-4 py-6">
             <div class="flex justify-between items-center">
-                <img src="{{ asset('images/app-logo.png') }}" alt="TeApp Logo" class="w-16 h-16 object-contain lg:order-1">
+                <img src="{{ asset('images/TeAssist(1).png') }}" alt="TeAssist Logo" class="size-1-10 object-contain lg:order-1">
                 <div class="lg:hidden">
                     <button id="menu-toggle" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600">
                         <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
@@ -72,10 +77,8 @@
                     <a href="{{ route('index')}}" class="text-gray-700 text-lg">Home</a>
                     <a href="{{ route('index.tea')}}" class="text-gray-700 text-lg">Infórmate</a>
                     <a href="{{ route('index.nosotros')}}" class="text-[#4172A9] text-lg font-bold">Nosotros</a>
-                    <div class="space-y-2 w-full max-w-[200px]">
                         <x-button onclick="location.href='{{ route('index.login')}}'" class="border-2 border-[#A0A8FF] text-[#A0A8FF] px-5 py-3 rounded-md hover:bg-[#A0A8FF] hover:text-white transition duration-300">Iniciar Sesión</x-button>
                         <x-button onclick="location.href='{{ route('index.login')}}'" class="border-2 border-[#A0A8FF] text-[#A0A8FF] px-5 py-3 rounded-md hover:bg-[#A0A8FF] hover:text-white transition duration-300">Registrarse</x-button>
-                    </div>
                 </div>
             </div>
         </nav>
@@ -100,7 +103,7 @@
         </section>
 
         <!-- Features Section -->
-        <section class="mb-8 py-8 bg-[#FDEFE7]">
+        <section class="mb-8 py-8 bg-[#E5E7FF]">
             <div class="max-w-5xl mx-auto px-4">
                 <h2 class="text-3xl font-semibold text-gray-800 mb-4 text-center">Características de TeApp</h2>
                 <ol class="list-decimal list-inside space-y-2">

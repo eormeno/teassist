@@ -1,7 +1,9 @@
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-            <x-authentication-card-logo />
+            <div class="font-sans text-gray-900 dark:text-gray-100 antialiased flex justify-center">
+                <img src="{{ asset('images/TeAssist(1).png') }}" alt="TeAssist Logo" class="w-1/2 h-1/2 object-contain lg:order-1">
+            </div>
         </x-slot>
 
         <x-validation-errors class="mb-4" />
