@@ -11,12 +11,15 @@ class PatientActivitiesApiController extends Controller
     {
         $patient = Patient::where('codigo', $code)->first();
         if (!$patient) {
-            return response()->json(['message' => 'Patient not found'], 404);
+            return response()->json([
+                'status' => 0,
+                'message' => 'Patient not found'], 404);
         }
         $activities = PatientActivity::where('patient_id', $patient->id)->with('activity')->get();
         $activities = $this->hidePatientActivitesResponseFields($activities);
         $patient = $this->hidePatientResponseFields($patient);
         $response = [
+            'status' => 1,
             'patient' => $patient,
             'activities' => $activities
         ];
