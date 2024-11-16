@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TeApp - Trastorno del Espectro Autista</title>
+    <title>TeAssist - Trastorno del Espectro Autista</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
@@ -105,7 +105,7 @@
         <!-- Features Section -->
         <section class="mb-8 py-8 bg-[#E5E7FF]">
             <div class="max-w-5xl mx-auto px-4">
-                <h2 class="text-3xl font-semibold text-gray-800 mb-4 text-center">Características de TeApp</h2>
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4 text-center">Características de TeAssist</h2>
                 <ol class="list-decimal list-inside space-y-2">
                     <li>Interfaz amigable e intuitiva: Desarrollada para facilitar su uso a personas con TEA, con una navegación simple y adaptada a sus dificultades de comunicación.</li>
                     <li>Personalización: Cada usuario puede adaptar la interfaz y el contenido a sus necesidades y capacidades individuales, reconociendo la diversidad dentro del espectro autista.</li>
@@ -164,7 +164,7 @@
 
             <!-- Créditos -->
             <div class="text-center">
-                <p>Creardo por TeApp. Todos los derechos reservados</p>
+                <p>Creardo por TeAssist. Todos los derechos reservados</p>
             </div>
         </div>
     </footer>

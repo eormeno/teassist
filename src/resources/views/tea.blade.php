@@ -251,7 +251,7 @@
 
             <!-- Créditos -->
             <div class="text-center">
-                <p>Creardo por TeApp. Todos los derechos reservados</p>
+                <p>Creardo por TeAssist. Todos los derechos reservados</p>
             </div>
         </div>
     </footer>
