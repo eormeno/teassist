@@ -14,7 +14,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Poppins', ...defaultTheme.fontFamily.sans],
             },
             width: {
                 '1/10': '12%',
@@ -22,6 +22,10 @@ export default {
               height: {
                 '1/10': '12%',
               },
+            input: {
+                'bg-blanco': '#FFFFFF', /* Cambia este color al que desees */
+            },
+
         },
 
     },

@@ -4,5 +4,8 @@
 [ext_resource type="Script" path="res://mueve.gd" id="2_lybsp"]
 
 [node name="Icon" type="Sprite2D"]
+position = Vector2(367, 250)
 texture = ExtResource("1_630km")
 script = ExtResource("2_lybsp")
+speed = 500
+rotation_speed = 5

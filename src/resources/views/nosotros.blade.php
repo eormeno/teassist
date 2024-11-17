@@ -67,8 +67,12 @@
                         <a href="{{ route('index.nosotros')}}" class="text-[#4172A9] text-lg font-bold">Nosotros</a>
                     </div>
                     <div class="flex-1 flex justify-end space-x-4">
-                        <x-button onclick="location.href='{{ route('index.login')}}'" class="border-2 border-[#A0A8FF] text-[#A0A8FF] px-5 py-3 rounded-md hover:bg-[#A0A8FF] hover:text-white transition duration-300">Iniciar Sesión</x-button>
-                        <x-button onclick="location.href='{{ route('index.login')}}'" class="border-2 border-[#A0A8FF] text-[#A0A8FF] px-5 py-3 rounded-md hover:bg-[#A0A8FF] hover:text-white transition duration-300">Registrarse</x-button>
+                        @auth
+                            <x-button onclick="location.href='{{ route('dashboard')}}'" class="border-2 border-[#A0A8FF] text-[#A0A8FF] px-5 py-3 rounded-md hover:bg-[#A0A8FF] hover:text-white transition duration-300">Dashboard</x-button>
+                        @else
+                            <x-button onclick="location.href='{{ route('index.login')}}'" class="border-2 border-[#A0A8FF] text-[#A0A8FF] px-5 py-3 rounded-md hover:bg-[#A0A8FF] hover:text-white transition duration-300">Iniciar Sesión</x-button>
+                            <x-button onclick="location.href='{{ route('index.login')}}'" class="border-2 border-[#A0A8FF] text-[#A0A8FF] px-5 py-3 rounded-md hover:bg-[#A0A8FF] hover:text-white transition duration-300">Registrarse</x-button>
+                        @endauth
                     </div>
                 </div>
             </div>
@@ -77,8 +81,12 @@
                     <a href="{{ route('index')}}" class="text-gray-700 text-lg">Home</a>
                     <a href="{{ route('index.tea')}}" class="text-gray-700 text-lg">Infórmate</a>
                     <a href="{{ route('index.nosotros')}}" class="text-[#4172A9] text-lg font-bold">Nosotros</a>
-                        <x-button onclick="location.href='{{ route('index.login')}}'" class="border-2 border-[#A0A8FF] text-[#A0A8FF] px-5 py-3 rounded-md hover:bg-[#A0A8FF] hover:text-white transition duration-300">Iniciar Sesión</x-button>
-                        <x-button onclick="location.href='{{ route('index.login')}}'" class="border-2 border-[#A0A8FF] text-[#A0A8FF] px-5 py-3 rounded-md hover:bg-[#A0A8FF] hover:text-white transition duration-300">Registrarse</x-button>
+                        @auth
+                            <x-button onclick="location.href='{{ route('dashboard')}}'" class="border-2 border-[#A0A8FF] text-[#A0A8FF] px-5 py-3 rounded-md hover:bg-[#A0A8FF] hover:text-white transition duration-300">Dashboard</x-button>
+                        @else
+                            <x-button onclick="location.href='{{ route('index.login')}}'" class="border-2 border-[#A0A8FF] text-[#A0A8FF] px-5 py-3 rounded-md hover:bg-[#A0A8FF] hover:text-white transition duration-300">Iniciar Sesión</x-button>
+                            <x-button onclick="location.href='{{ route('index.login')}}'" class="border-2 border-[#A0A8FF] text-[#A0A8FF] px-5 py-3 rounded-md hover:bg-[#A0A8FF] hover:text-white transition duration-300">Registrarse</x-button>
+                        @endauth
                 </div>
             </div>
         </nav>

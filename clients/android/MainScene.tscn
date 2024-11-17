@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://cn8yx6nr5dgu7"]
+
+[ext_resource type="Script" path="res://main_scene.gd" id="1_aqu8j"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aqu8j")
+
+[node name="Nombres" type="Label" parent="."]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 30.0
+offset_right = 192.0
+offset_bottom = 53.0
+text = "ESCENA PRINCIPAL"
+
+[node name="Apellidos" type="Label" parent="."]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 64.0
+offset_right = 193.0
+offset_bottom = 87.0
+text = "ESCENA PRINCIPAL"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 103.0
+offset_right = 92.0
+offset_bottom = 143.0

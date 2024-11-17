@@ -25,8 +25,8 @@
                         @method('PATCH')
                         <x-validation-errors class="mb-4" />
                         <div>
-                            <x-label for="name" value="{{ __('Name') }}" />
-                            <x-input id="name" class="block mt-1 w-full" type="text" name="name"
+                            <x-label for="name" value="{{ __('Name') }}" class="text-black" />
+                            <x-input id="name" class="block mt-1 w-full bg-white" type="text" name="name"
                                 value="{{ $role->name }}" required autofocus autocomplete="name" />
                         </div>
 

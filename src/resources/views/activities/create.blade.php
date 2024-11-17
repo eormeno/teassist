@@ -19,10 +19,10 @@
         <div class="mt-2">
             <x-label for="description" value="Descripción" />
             <textarea name="description" id="description" cols="30" rows="3"
-                class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full"
+                class="border-gray-300 dark:border-gray-700 dark:bg-gray-200 dark:text-gray-900 focus:border-[#E5E7FF] dark:focus:border-[#A0A8FF] focus:ring-[#E5E7FF] dark:focus:ring-[#A0A8FF] rounded-md shadow-sm block mt-1 w-full"
                 required>{{ old('description') }}</textarea>
         </div>
-        <div class="mb-3">
+        <div class="mt-3">
             <x-label for="image" value="Imagen" />
             <x-input id="image" class="block mt-1 w-full" type="file" name="image" :value="old('image')" required
                 autocomplete="image" />

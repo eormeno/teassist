@@ -37,7 +37,7 @@
                         <div class="mt-4">
                             <x-label for="options" value="{{ __('Select Roles') }}" />
                             <select id="options" name="roles[]" multiple
-                                class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full">
+                                    class="border-gray-300 dark:border-gray-700 dark:bg-gray-200 dark:text-gray-900 focus:border-[#E5E7FF] dark:focus:border-[#A0A8FF] focus:ring-[#E5E7FF] dark:focus:ring-[#A0A8FF] rounded-md shadow-sm block mt-1 w-full">
                                 @foreach ($roles as $role)
                                     <option value="{{ $role }}"
                                         @if (in_array($role, $userRole)) selected @endif>{{ $role }}</option>
