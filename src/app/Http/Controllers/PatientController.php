@@ -39,7 +39,8 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
-        return view('patients.show', compact('patient'));
+        $title = "Detalles del Paciente"; // Define la variable
+        return view('patients.show', compact('patient', 'title')); // Pásala a la vista
     }
 
     /**

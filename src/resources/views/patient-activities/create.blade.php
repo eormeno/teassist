@@ -60,6 +60,16 @@
                 <x-input-error for="indicators" class="mt-2" />
             </div>
         </div>
+        <!-- Fecha de la actividad -->
+        <div>
+            <x-label for="activity_date" :value="__('Fecha de la actividad')" class="font-semibold label-custom-blue" />
+            <input type="date" name="activity_date" id="activity_date"
+                value="{{ old('activity_date') ?? now()->format('Y-m-d') }}"
+                class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                required>
+            <x-input-error for="activity_date" class="mt-2" />
+        </div>
+
 
         <div class="flex justify-end space-x-4 mt-6">
             <!-- Botón "Asignar actividad" -->

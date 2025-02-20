@@ -7,10 +7,13 @@ use App\Models\Activity;
 use App\Models\PatientActivity;
 use App\Http\Requests\StorePatientActivityRequest;
 use App\Http\Requests\UpdatePatientActivityRequest;
+use Carbon\Carbon;
+
 
 class PatientActivityController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $patient_id = request()->get('patient_id');
         $patients = Patient::all();
         $patientActivities = PatientActivity::where('patient_id', $patient_id)->paginate(5);
@@ -25,8 +28,9 @@ class PatientActivityController extends Controller
         $patient_id = request()->get('patient_id');
         $patient = Patient::find($patient_id);
         $patient_full_name = $patient->apellidos . ', ' . $patient->nombres;
+        $activity_date = Carbon::now(); // Guarda la fecha y hora actuales
         $activities = Activity::all();
-        return view('patient-activities.create', compact('activities', 'patient_id', 'patient_full_name'));
+        return view('patient-activities.create', compact('activities', 'patient_id', 'patient_full_name', 'activity_date'));
     }
 
     /**
@@ -37,11 +41,19 @@ class PatientActivityController extends Controller
         $user_id = auth()->user()->id;
         $patient_id = request()->get('patient_id');
         $validated = $request->validated();
+
         $validated['user_id'] = $user_id;
         $validated['patient_id'] = $patient_id;
+        $validated['activity_date'] = $request->activity_date; // 📌 Asegura que se asigna manualmente
+
         PatientActivity::create($validated);
+
         return redirect()->route('patient-activities.index', ['patient_id' => $patient_id]);
     }
+
+
+
+
 
     /**
      * Display the specified resource.

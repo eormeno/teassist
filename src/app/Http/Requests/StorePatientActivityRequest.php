@@ -30,6 +30,7 @@ class StorePatientActivityRequest extends FormRequest
             'reasons' => ['required', 'string'],
             'goals' => ['required', 'string'],
             'indicators' => ['required', 'string'],
+            'activity_date' => 'nullable|date',
         ];
     }
 

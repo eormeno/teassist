@@ -18,6 +18,7 @@ class PatientActivity extends Model
         'reasons',
         'goals',
         'indicators',
+        'activity_date',
     ];
 
     public function user(): BelongsTo

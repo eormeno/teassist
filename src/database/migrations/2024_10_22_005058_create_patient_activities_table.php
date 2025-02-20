@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('reasons')->nullable();
             $table->text('goals')->nullable();
             $table->text('indicators')->nullable();
+            $table->date('activity_date')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

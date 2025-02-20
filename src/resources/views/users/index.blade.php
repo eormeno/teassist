@@ -64,7 +64,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="delete-btn bg-[#dbf227] text-white py-1 px-2 rounded inline-flex items-center justify-center w-8 h-8"
+                                            class="delete-btn bg-[#dbf227] text-[#1E1E49] py-1 px-2 rounded inline-flex items-center justify-center w-8 h-8"
                                             title="Eliminar">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="w-5 h-5">

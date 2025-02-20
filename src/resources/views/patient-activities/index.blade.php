@@ -41,6 +41,7 @@
                         <tr>
                             <th class="py-3 px-4 text-left font-medium">Nombre</th>
                             <th class="py-3 px-4 text-left font-medium">Descripción</th>
+                            <th class="py-3 px-4 text-center font-medium">Fecha</th>
                             <th class="py-3 px-4 text-center font-medium">Acciones</th>
                         </tr>
                     </thead>
@@ -49,6 +50,18 @@
                             <tr class="{{ $key % 2 === 0 ? 'bg-gray-50' : 'bg-white' }} hover:bg-gray-100">
                                 <td class="py-3 px-4 text-left">{{ $patient_activity->activity->name }}</td>
                                 <td class="py-3 px-4 text-left">{{ Str::limit($patient_activity->activity->description, 30) }}</td>
+                                <td class="py-3 px-4 text-center">
+                                    {{ $patient_activity->activity->activity_date
+                            ? \Carbon\Carbon::parse($patient_activity->activity->activity_date)->format('d/m/Y')
+                            : 'Sin fecha' }}
+                                    <br>
+                                    <span class="text-gray-500 text-sm">
+                                        {{ $patient_activity->activity->activity_date
+                            ? \Carbon\Carbon::parse($patient_activity->activity->activity_date)->diffForHumans()
+                            : '' }}
+                                    </span>
+                                </td>
+
                                 <td class="py-3 px-4 flex justify-center space-x-3">
                                     <a href="{{ route('patient-activities.show', $patient_activity) }}"
                                         class="action-btn view-btn bg-[#a4c2db] text-[#1E1E49] py-1 px-2 rounded inline-flex items-center justify-center w-8 h-8">
@@ -74,7 +87,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="delete-btn bg-[#dbf227] text-white py-1 px-2 rounded inline-flex items-center justify-center w-8 h-8"
+                                            class="delete-btn bg-[#dbf227] text-[#1E1E49] py-1 px-2 rounded inline-flex items-center justify-center w-8 h-8"
                                             title="Eliminar">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
