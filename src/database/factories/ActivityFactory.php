@@ -14,8 +14,9 @@ class ActivityFactory extends Factory
         return [
             'name' => $this->faker->sentence(2),
             'description' => $this->faker->paragraph(),
-            'image' => $images['original'],
-            'thumbnail' => $images['thumbnail']
+            'image' => $images['original'] ?? 'default.jpg',
+            'thumbnail' => $images['thumbnail'] ?? 'default_thumb.jpg'
         ];
+
     }
 }

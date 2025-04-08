@@ -27,5 +27,8 @@ class AppServiceProvider extends ServiceProvider
                 return true;
             }
         });
+        Gate::define('view-patients', function ($user) {
+            return $user->hasRole('terapeuta');
+        });
     }
 }

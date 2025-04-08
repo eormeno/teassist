@@ -20,6 +20,7 @@ class PermissionsSeeder extends Seeder
     private const USERS_DELETE = 'users-delete';
     private const USERS_DISABLE = 'users-disable';
     private const USERS_ENABLE = 'users-enable';
+    private const VIEW_PATIENTS = 'view-patients'; // Permiso para ver pacientes
 
     private $permissions = [
         self::SEE_PANEL,
@@ -33,6 +34,7 @@ class PermissionsSeeder extends Seeder
         self::USERS_DELETE,
         self::USERS_DISABLE,
         self::USERS_ENABLE,
+        self::VIEW_PATIENTS, // Lo agrego a la lista de permisos
     ];
 
     public function run(): void
@@ -41,7 +43,10 @@ class PermissionsSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         foreach ($this->permissions as $permission) {
-            Permission::create(['name' => $permission]);
+            if (!Permission::where('name', $permission)->exists()) {
+                Permission::create(['name' => $permission]);
+            }
+            
         }
 
         Role::create(['name' => 'root']);
@@ -64,5 +69,13 @@ class PermissionsSeeder extends Seeder
         $users_admin->givePermissionTo(self::USERS_DELETE);
         $users_admin->givePermissionTo(self::USERS_DISABLE);
         $users_admin->givePermissionTo(self::USERS_ENABLE);
+
+        $therapist_role = Role::create(['name' => 'terapeuta']);
+        $therapist_role->givePermissionTo(self::VIEW_PATIENTS);
+        $therapist_role->givePermissionTo(self::SEE_PANEL); 
+
+        $pacient_role = Role::create(['name' => 'pacient_role']);
+        $pacient_role->givePermissionTo(self::SEE_PANEL);
+
     }
 }

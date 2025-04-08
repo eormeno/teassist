@@ -8,15 +8,19 @@ use App\Models\PatientActivity;
 use App\Http\Requests\StorePatientActivityRequest;
 use App\Http\Requests\UpdatePatientActivityRequest;
 use Carbon\Carbon;
+use App\Traits\DebugHelper;
 
 
 class PatientActivityController extends Controller
 {
+    use DebugHelper;
     public function index()
     {
         $patient_id = request()->get('patient_id');
         $patients = Patient::all();
-        $patientActivities = PatientActivity::where('patient_id', $patient_id)->paginate(5);
+        $patientActivities = PatientActivity::where('patient_id', $patient_id)
+        ->orderByDesc('activity_date') // Ordena por fecha, de más reciente a más antigua
+        ->paginate(5); // Mantiene la paginación    
         return view('patient-activities.index', compact('patientActivities', 'patients', 'patient_id'));
     }
 

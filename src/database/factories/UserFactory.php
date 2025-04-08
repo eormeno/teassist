@@ -43,4 +43,11 @@ class UserFactory extends Factory
             'password' => Hash::make(env('ADMIN_PASSWORD')),
         ]);
     }
+    public function therapist(): static
+    {
+        return $this->state(fn(array $attributes) => [
+            'role' => 'terapeuta', // Asigna el rol de terapeuta
+        ]);
+    }
+
 }

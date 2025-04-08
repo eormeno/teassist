@@ -17,5 +17,6 @@ class UsersSeeder extends Seeder
             $user->assignRole('registered');
         });
 
+        
     }
 }

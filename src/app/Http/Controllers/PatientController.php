@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 use App\Http\Requests\PatientRequest;
+use Illuminate\Support\Facades\Gate;
+
 
 class PatientController extends Controller
 {
@@ -12,10 +14,27 @@ class PatientController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $patients = Patient::latest()->paginate(5);
+{
+    $user = auth()->user();
+
+    //if ($user->hasRole('paciente')) {
+        // Paciente: ve solo sus actividades asignadas
+      //  $activities = $user->patient?->activities ?? collect();
+        //return view('activities.index', compact('activities'));
+    //}
+
+    if ($user->can('view-patients')) {
+        // Terapeuta u otro rol con permiso: ve todos los pacientes paginados
+        $patients = Patient::paginate(5);
         return view('patients.index', compact('patients'));
     }
+
+    // Sin permiso ni rol adecuado
+    abort(403);
+}
+
+    
+    
 
     /**
      * Show the form for creating a new resource.

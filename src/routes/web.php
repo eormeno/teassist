@@ -21,7 +21,7 @@ Route::get('/login', function () {
 Route::get('/contador', [ContadorController::class, 'index'])->name('contador');
 Route::get('/contador/incrementar/{número}', [ContadorController::class, 'incrementar'])->name('incrementar');
 Route::get('/contador/decrementar/{número}', [ContadorController::class, 'decrementar'])->name('decrementar');
-Route::resource('patients', PatientController::class)->middleware('auth');
+Route::resource('patients', PatientController::class)->middleware(['auth']);
 Route::resource('activities', ActivityController::class)->middleware('auth');
 Route::resource('patient-activities', PatientActivityController::class);
 

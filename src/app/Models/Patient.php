@@ -20,5 +20,16 @@ class Patient extends Model
         'email',
         'direccion',
         'observaciones',
+       
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function activities()
+    {
+        return $this->hasMany(PatientActivity::class);
+    }
 }
