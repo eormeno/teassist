@@ -132,12 +132,23 @@
 
             </div>
         </div>
-        <div class="px-4 flex items-center">
+        <div class="flex items-center gap-x-4">
             <a href="{{ route('login') }}"
-                class="border border-[#042940] text-black py-2 px-4 rounded mr-6 text-lg hover:bg-[#042940] hover:text-white transition duration-300">Ingresar</a>
+                class="border border-[#042940] text-black py-2 px-4 rounded text-lg hover:bg-[#042940] hover:text-white transition duration-300">
+                Ingresar
+            </a>
+
             <a href="{{ route('register') }}"
-                class="border border-[#042940] text-black py-2 px-4 rounded text-lg hover:bg-[#042940] hover:text-white transition duration-300">Registrarse</a>
+                class="border border-[#042940] text-black py-2 px-4 rounded text-lg hover:bg-[#042940] hover:text-white transition duration-300">
+                Registrarse
+            </a>
+
+            <a href="{{ route('patient.login') }}"
+                class="border border-[#042940] text-black py-2 px-4 rounded text-lg hover:bg-[#042940] hover:text-white transition duration-300">
+                Pacientes
+            </a>
         </div>
+
     </header>
 
     <!-- Contenedor principal -->
@@ -150,8 +161,8 @@
                 <h2 class="text-4xl font-bold text-white mb-4">Un Espacio de Apoyo y Aprendizaje</h2>
                 <p class="text-lg text-white mb-6">Donde el conocimiento se une para transformar vidas.</p>
                 <!-- Cambiado a azul -->
-                <a href="/register"
-                <a href="/register" class="bg-[#1E1E49] text-white py-2 px-20 rounded-lg text-lg hover:bg-[#A4C2DB] hover:text-black transition duration-300">Explora</a>
+                <a href="/register" <a href="/register"
+                    class="bg-[#1E1E49] text-white py-2 px-20 rounded-lg text-lg hover:bg-[#A4C2DB] hover:text-black transition duration-300">Explora</a>
 
                 <!-- Botón más grande y largo -->
             </div>
@@ -259,7 +270,8 @@
                         <h4 class="text-xs font-semibold text-gray-800">Lic. Ana García, Terapeuta</h4>
                     </div>
                     <div class="bg-white border-2 border-[#1E1E49] p-4 rounded-lg shadow-md mx-2 w-full max-w-[300px]">
-                        <p class="text-gray-700 mb-1 text-xs">"Gracias a TEAssist, mi trabajo se ha vuelto más eficiente."
+                        <p class="text-gray-700 mb-1 text-xs">"Gracias a TEAssist, mi trabajo se ha vuelto más
+                            eficiente."
                         </p>
                         <h4 class="text-xs font-semibold text-gray-800">Ing. Roberto Gómez, Ingeniero</h4>
                     </div>

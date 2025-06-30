@@ -1,41 +1,30 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Patient extends Model
+class Therapist extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'codigo',
-        'apellidos',
-        'nombres',
+        'user_id',
+        'nombre',
+        'apellido',
         'dni',
-        'nacimiento',
-        'sexo',
+        'fecha_nacimiento',
         'telefono',
         'email',
         'direccion',
-        'observaciones',
-
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-
-    public function activities()
+    public function patients()
     {
-        return $this->hasMany(PatientActivity::class);
+        return $this->hasMany(Patient::class);
     }
-
-    public function therapist()
-    {
-        return $this->belongsTo(Therapist::class);
-    }
-
 }

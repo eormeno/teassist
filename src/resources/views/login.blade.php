@@ -27,7 +27,7 @@
                 </div>
             @endif
             <form action="{{ url('/login') }}" method="POST">
-                @csrf <!-- Asegúrate de incluir este token de seguridad -->
+                @csrf 
                 <div class="mb-4">
                     <label for="email" class="block text-gray-700">Correo Electrónico</label>
                     <input type="email" id="email" name="email" class="form-input border p-2 w-full rounded" required>

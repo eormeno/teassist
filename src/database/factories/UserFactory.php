@@ -46,8 +46,7 @@ class UserFactory extends Factory
     public function therapist(): static
     {
         return $this->state(fn(array $attributes) => [
-            'role' => 'terapeuta', // Asigna el rol de terapeuta
-        ]);
+             ]);
     }
 
 }

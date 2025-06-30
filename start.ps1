@@ -1,3 +1,4 @@
+
 Clear-Host
 
 $currentPath = Get-Location

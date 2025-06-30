@@ -6,6 +6,10 @@ use App\Models\Patient;
 use Illuminate\Http\Request;
 use App\Http\Requests\PatientRequest;
 use Illuminate\Support\Facades\Gate;
+use App\Models\PatientActivity;
+use Illuminate\Support\Facades\Auth;
+
+
 
 
 class PatientController extends Controller
@@ -14,27 +18,28 @@ class PatientController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-{
-    $user = auth()->user();
+    {
+        $user = auth()->user();
 
-    //if ($user->hasRole('paciente')) {
-        // Paciente: ve solo sus actividades asignadas
-      //  $activities = $user->patient?->activities ?? collect();
-        //return view('activities.index', compact('activities'));
-    //}
+        // Verifica si tiene permiso para ver pacientes
+        if (!$user->can('view-patients')) {
+            abort(403);
+        }
 
-    if ($user->can('view-patients')) {
-        // Terapeuta u otro rol con permiso: ve todos los pacientes paginados
-        $patients = Patient::paginate(5);
+        // Si es terapeuta, filtra solo sus pacientes
+        if ($user->hasRole('therapist') && $user->therapist) {
+            $patients = $user->therapist->patients()->paginate(5);
+        } else {
+            // Otros roles con permiso ven todos
+            $patients = Patient::paginate(5);
+        }
+
         return view('patients.index', compact('patients'));
     }
 
-    // Sin permiso ni rol adecuado
-    abort(403);
-}
 
-    
-    
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -43,23 +48,28 @@ class PatientController extends Controller
     {
         return view('patients.create');
     }
+    public function show(Patient $patient)
+    {
+        $title = "Detalles del Paciente";
+        return view('patients.show', compact('patient', 'title'));
+    }
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(PatientRequest $request)
     {
-        Patient::create($request->validated());
-        return redirect()->route('patients.index');
-    }
+        $data = $request->validated();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Patient $patient)
-    {
-        $title = "Detalles del Paciente"; // Define la variable
-        return view('patients.show', compact('patient', 'title')); // Pásala a la vista
+        // Si el usuario autenticado tiene rol de terapeuta, se asocia su ID
+        if (auth()->user()->hasRole('therapist') && auth()->user()->therapist) {
+            $data['therapist_id'] = auth()->user()->therapist->id;
+        }
+
+        Patient::create($data);
+
+        return redirect()->route('patients.index');
     }
 
     /**
@@ -98,4 +108,37 @@ class PatientController extends Controller
         $patient->delete();
         return redirect()->route('patients.index');
     }
+    public function storeMood(Request $request)
+    {
+        $mood = $request->input('mood');
+
+        auth()->user()->update(['last_mood' => $mood]);
+
+        return back()->with('success', 'Estado de ánimo registrado');
+    }
+    public function dashboard()
+    {
+        $user = auth()->user();
+
+        if (!$user->patient) {
+            abort(403, 'No tenés permiso para ver estas actividades.');
+        }
+
+        $patientName = $user->patient->name;
+        $activitiesCount = PatientActivity::where('patient_id', $patientName)->count();
+
+        return view('patients.dashboard', compact('activitiesCount', 'patientName'));
+
+    }
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
+    }
+
+
 }

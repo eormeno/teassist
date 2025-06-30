@@ -10,91 +10,146 @@ use App\Http\Requests\UpdatePatientActivityRequest;
 use Carbon\Carbon;
 use App\Traits\DebugHelper;
 
-
 class PatientActivityController extends Controller
 {
     use DebugHelper;
+
     public function index()
-    {
-        $patient_id = request()->get('patient_id');
-        $patients = Patient::all();
-        $patientActivities = PatientActivity::where('patient_id', $patient_id)
-        ->orderByDesc('activity_date') // Ordena por fecha, de más reciente a más antigua
-        ->paginate(5); // Mantiene la paginación    
-        return view('patient-activities.index', compact('patientActivities', 'patients', 'patient_id'));
+{
+    $patient_id = request()->get('patient_id');
+    $therapistId = auth()->user()->therapist->id;
+
+    // Obtener pacientes asignados al terapeuta
+    $patients = Patient::where('therapist_id', $therapistId)->get();
+
+    // Si no se seleccionó ningún paciente, mostrar solo el dropdown sin error
+    if (!$patient_id) {
+        return view('patient-activities.index', compact('patients', 'patient_id'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Validar que el paciente consultado sea del terapeuta
+    if (!Patient::where('id', $patient_id)->where('therapist_id', $therapistId)->exists()) {
+        abort(403, 'No tenés permiso para ver este paciente.');
+    }
+
+    $patientActivities = PatientActivity::where('patient_id', $patient_id)
+        ->orderByDesc('activity_date')
+        ->paginate(5);
+
+    return view('patient-activities.index', compact('patientActivities', 'patients', 'patient_id'));
+}
+
+
     public function create()
     {
         $patient_id = request()->get('patient_id');
-        $patient = Patient::find($patient_id);
+        $therapistId = auth()->user()->therapist->id;
+
+        // Validar que el paciente sea del terapeuta
+        $patient = Patient::where('id', $patient_id)
+            ->where('therapist_id', $therapistId)
+            ->firstOrFail();
+
         $patient_full_name = $patient->apellidos . ', ' . $patient->nombres;
-        $activity_date = Carbon::now(); // Guarda la fecha y hora actuales
+        $activity_date = Carbon::now();
         $activities = Activity::all();
+
         return view('patient-activities.create', compact('activities', 'patient_id', 'patient_full_name', 'activity_date'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StorePatientActivityRequest $request)
     {
         $user_id = auth()->user()->id;
+        $therapistId = auth()->user()->therapist->id;
         $patient_id = request()->get('patient_id');
-        $validated = $request->validated();
 
+        // Validar que el paciente sea del terapeuta
+        Patient::where('id', $patient_id)
+            ->where('therapist_id', $therapistId)
+            ->firstOrFail();
+
+        $validated = $request->validated();
         $validated['user_id'] = $user_id;
         $validated['patient_id'] = $patient_id;
-        $validated['activity_date'] = $request->activity_date; // 📌 Asegura que se asigna manualmente
+        $validated['activity_date'] = $request->activity_date;
 
         PatientActivity::create($validated);
 
         return redirect()->route('patient-activities.index', ['patient_id' => $patient_id]);
     }
 
-
-
-
-
-    /**
-     * Display the specified resource.
-     */
     public function show(PatientActivity $patientActivity)
     {
         return view('patient-activities.show', compact('patientActivity'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(PatientActivity $patientActivity)
     {
+        // Validar que el paciente de la actividad sea del terapeuta
+        $therapistId = auth()->user()->therapist->id;
+        if ($patientActivity->patient->therapist_id !== $therapistId) {
+            abort(403, 'No tenés permiso para editar esta actividad.');
+        }
+
         $patient = $patientActivity->patient;
         $patient_full_name = $patient->apellidos . ', ' . $patient->nombres;
         $activities = Activity::all();
+
         return view('patient-activities.edit', compact('patientActivity', 'activities', 'patient_full_name'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdatePatientActivityRequest $request, PatientActivity $patientActivity)
     {
+        // Validar que el paciente de la actividad sea del terapeuta
+        $therapistId = auth()->user()->therapist->id;
+        if ($patientActivity->patient->therapist_id !== $therapistId) {
+            abort(403, 'No tenés permiso para modificar esta actividad.');
+        }
+
         $patient_id = $patientActivity->patient_id;
         $validated = $request->validated();
         $patientActivity->update($validated);
+
         return redirect()->route('patient-activities.index', ['patient_id' => $patient_id]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(PatientActivity $patientActivity)
     {
+        // Validar que el paciente de la actividad sea del terapeuta
+        $therapistId = auth()->user()->therapist->id;
+        if ($patientActivity->patient->therapist_id !== $therapistId) {
+            abort(403, 'No tenés permiso para eliminar esta actividad.');
+        }
+
         $patientActivity->delete();
         return redirect()->route('patient-activities.index', ['patient_id' => $patientActivity->patient_id]);
     }
+    public function indexForPatient()
+    {
+        $patient = auth()->user()->patient;
+
+        $patientActivities = $patient->activities()->with('activity')->orderByDesc('activity_date')->get();
+
+        return view('patient.activities.index', compact('patientActivities'));
+    }
+    public function myActivities()
+    {
+        $user = auth()->user();
+
+        // Verificamos que sea paciente y tenga asignado un registro en la tabla `patients`
+        if (!$user->patient) {
+            abort(403, 'No tenés permiso para ver estas actividades.');
+        }
+
+        $patientId = $user->patient->id;
+
+        $activities = PatientActivity::with('activity')
+            ->where('patient_id', $patientId)
+            ->orderByDesc('activity_date')
+            ->get();
+
+        return view('patients.activities', compact('activities'));
+    }
+
+
 }
