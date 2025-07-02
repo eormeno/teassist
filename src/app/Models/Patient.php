@@ -20,6 +20,7 @@ class Patient extends Model
         'email',
         'direccion',
         'observaciones',
+        'last_mood',
 
     ];
 

@@ -15,29 +15,29 @@ class PatientActivityController extends Controller
     use DebugHelper;
 
     public function index()
-{
-    $patient_id = request()->get('patient_id');
-    $therapistId = auth()->user()->therapist->id;
+    {
+        $patient_id = request()->get('patient_id');
+        $therapistId = auth()->user()->therapist->id;
 
-    // Obtener pacientes asignados al terapeuta
-    $patients = Patient::where('therapist_id', $therapistId)->get();
+        // Obtener pacientes asignados al terapeuta
+        $patients = Patient::where('therapist_id', $therapistId)->get();
 
-    // Si no se seleccionó ningún paciente, mostrar solo el dropdown sin error
-    if (!$patient_id) {
-        return view('patient-activities.index', compact('patients', 'patient_id'));
+        // Si no se seleccionó ningún paciente, mostrar solo el dropdown sin error
+        if (!$patient_id) {
+            return view('patient-activities.index', compact('patients', 'patient_id'));
+        }
+
+        // Validar que el paciente consultado sea del terapeuta
+        if (!Patient::where('id', $patient_id)->where('therapist_id', $therapistId)->exists()) {
+            abort(403, 'No tenés permiso para ver este paciente.');
+        }
+
+        $patientActivities = PatientActivity::where('patient_id', $patient_id)
+            ->orderByDesc('activity_date')
+            ->paginate(5);
+
+        return view('patient-activities.index', compact('patientActivities', 'patients', 'patient_id'));
     }
-
-    // Validar que el paciente consultado sea del terapeuta
-    if (!Patient::where('id', $patient_id)->where('therapist_id', $therapistId)->exists()) {
-        abort(403, 'No tenés permiso para ver este paciente.');
-    }
-
-    $patientActivities = PatientActivity::where('patient_id', $patient_id)
-        ->orderByDesc('activity_date')
-        ->paginate(5);
-
-    return view('patient-activities.index', compact('patientActivities', 'patients', 'patient_id'));
-}
 
 
     public function create()
@@ -71,7 +71,9 @@ class PatientActivityController extends Controller
         $validated = $request->validated();
         $validated['user_id'] = $user_id;
         $validated['patient_id'] = $patient_id;
-        $validated['activity_date'] = $request->activity_date;
+
+        // Aquí le asigno la fecha y hora actual
+        $validated['activity_date'] = Carbon::now();
 
         PatientActivity::create($validated);
 
@@ -124,14 +126,7 @@ class PatientActivityController extends Controller
         $patientActivity->delete();
         return redirect()->route('patient-activities.index', ['patient_id' => $patientActivity->patient_id]);
     }
-    public function indexForPatient()
-    {
-        $patient = auth()->user()->patient;
 
-        $patientActivities = $patient->activities()->with('activity')->orderByDesc('activity_date')->get();
-
-        return view('patient.activities.index', compact('patientActivities'));
-    }
     public function myActivities()
     {
         $user = auth()->user();

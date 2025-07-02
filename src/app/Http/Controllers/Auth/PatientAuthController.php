@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use App\Models\Patient;
+
+
 
 class PatientAuthController extends Controller
 {
@@ -14,29 +19,35 @@ class PatientAuthController extends Controller
     }
 
     public function login(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => ['required','email'],
-            'password' => ['required'],
-        ]);
+{
+    $request->validate([
+        'code' => 'required|string',
+        'password' => 'required|string',
+    ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+    $patient = Patient::where('codigo', $request->code)->first();
 
-            if (Auth::user()->hasRole('patient')) {
-                return redirect()->intended('/patient/dashboard');
-            }
 
-            Auth::logout();
-            return back()->withErrors([
-                'email' => 'No autorizado como paciente.',
-            ]);
-        }
-
-        return back()->withErrors([
-            'email' => 'Credenciales incorrectas.',
-        ]);
+    if (!$patient) {
+        return back()->withErrors(['code' => 'Código inválido.'])->withInput();
     }
+
+    if (!$patient->user) {
+        return back()->withErrors(['code' => 'Paciente sin usuario asociado.'])->withInput();
+    }
+
+    $user = $patient->user;
+
+    if (!Hash::check($request->password, $user->password)) {
+        return back()->withErrors(['password' => 'Contraseña incorrecta.'])->withInput();
+    }
+
+    Auth::loginUsingId($user->id);
+    $request->session()->regenerate();
+
+    return redirect('/patient/dashboard');
+}
+
 
     public function logout(Request $request)
     {

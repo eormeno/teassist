@@ -55,11 +55,12 @@
                                     <br>
                                     <span class="text-gray-500 text-sm">
                                         {{ $patient_activity->activity_date
-                            ?ucfirst( \Carbon\Carbon::parse($patient_activity->activity_date)->diffForHumans())
+                            ? ucfirst(\Carbon\Carbon::parse($patient_activity->activity_date)->setTimezone('America/Argentina/Buenos_Aires')->diffForHumans())
                             : '' }}
                                     </span>
+
                                 </td>
-                                              
+
                                 <td class="py-3 px-4 flex justify-center space-x-3">
                                     <a href="{{ route('patient-activities.show', $patient_activity) }}"
                                         class="action-btn view-btn bg-[#a4c2db] text-[#1E1E49] py-1 px-2 rounded inline-flex items-center justify-center w-8 h-8">

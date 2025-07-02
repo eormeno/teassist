@@ -48,16 +48,17 @@ Route::post('/patient-logout', [PatientAuthController::class, 'logout'])->name('
 // Grupo para rutas de pacientes autenticados con rol
 Route::middleware(['auth', 'role:patient'])->group(function () {
     Route::get('/patient/dashboard', [PatientController::class, 'dashboard'])->name('patient.dashboard');
-    Route::get('/patient/activities', [PatientActivityController::class, 'indexForPatient'])->name('patient.activities.index');
-
+    
 });
 
 // Ruta para guardar el estado de ánimo (puede ser general para paciente logueado)
 Route::middleware('auth')->post('/patient/mood', [PatientController::class, 'storeMood'])->name('patient.mood.store');
 
 Route::middleware(['auth', 'role:patient'])->group(function () {
-    Route::get('/mis-actividades', [PatientActivityController::class, 'myActivities'])->name('patient.activities');
+    Route::get('/mis-actividades', [PatientActivityController::class, 'myActivities'])->name('patients.activities');
 });
+
 Route::middleware(['auth', 'role:patient'])->group(function () {
     Route::post('/patient/logout', [PatientController::class, 'logout'])->name('patient.logout');
 });
+Route::patch('/patient/activity/{activity}/toggle', [PatientController::class, 'toggleActivity'])->name('patient.activity.toggle');

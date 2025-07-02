@@ -1,0 +1,578 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+@font-face {
+    font-family: 'Atkinson Hyperlegible';
+    src: url('../fonts/atkinson/Atkinson-Hyperlegible-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+body {
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    background-image: url('images/patron.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Header */
+.header {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 3px solid #81C784;
+    text-align: center;
+}
+
+.logo {
+    width: 80px;
+    height: auto;
+    margin: 0 auto 15px;
+    animation: gentle-bounce 3s ease-in-out infinite;
+}
+
+.logo img {
+    width: 100%;
+    height: auto;
+}
+
+@keyframes gentle-bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-3px);
+    }
+
+    60% {
+        transform: translateY(-2px);
+    }
+}
+
+.welcome-title {
+    color: #2E7D32;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.welcome-subtitle {
+    color: #4CAF50;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+/* Main container */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Cards grid */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+/* Base card styles */
+.card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    border: 3px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #4CAF50, #8BC34A);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.card:hover::before {
+    transform: scaleX(1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Activities card */
+.activities-card {
+    border-color: #81C784;
+    background: linear-gradient(135deg, #E8F5E8 0%, #F1F8E9 100%);
+}
+
+.activities-card .card-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    display: block;
+    animation: rotate-gentle 4s ease-in-out infinite;
+}
+
+@keyframes rotate-gentle {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(-3deg);
+    }
+
+    75% {
+        transform: rotate(3deg);
+    }
+}
+
+.card-title {
+    color: #2E7D32;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-content {
+    color: #388E3C;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.activity-counter {
+    background: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+/* Mood card */
+.mood-card {
+    border-color: #FFB74D;
+    background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+}
+
+.mood-card .card-title {
+    color: #F57C00;
+}
+
+.mood-card .card-content {
+    color: #FF8F00;
+}
+
+.mood-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.mood-btn {
+    width: 80px;
+    height: 80px;
+    border: none;
+    border-radius: 50%;
+    font-size: 36px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mood-btn:hover {
+    transform: scale(1.1) translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.mood-btn.happy {
+    background: linear-gradient(135deg, #4CAF50, #66BB6A);
+}
+
+.mood-btn.neutral {
+    background: linear-gradient(135deg, #9E9E9E, #BDBDBD);
+}
+
+.mood-btn.sad {
+    background: linear-gradient(135deg, #2196F3, #42A5F5);
+}
+
+/* Progress card */
+.progress-card {
+    border-color: #9C27B0;
+    background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+}
+
+.progress-card .card-title {
+    color: #7B1FA2;
+}
+
+.progress-card .card-content {
+    color: #8E24AA;
+}
+
+.progress-visual {
+    display: flex;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.progress-star {
+    font-size: 24px;
+    color: #FFD700;
+    animation: twinkle 2s ease-in-out infinite;
+}
+
+.progress-star:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.progress-star:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.progress-star:nth-child(4) {
+    animation-delay: 0.9s;
+}
+
+.progress-star:nth-child(5) {
+    animation-delay: 1.2s;
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
+}
+
+/* Achievements card */
+.achievements-card {
+    border-color: #FF9800;
+    background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+}
+
+.achievements-card .card-title {
+    color: #E65100;
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.achievement-badge {
+    background: #FF9800;
+    color: white;
+    padding: 10px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 24px;
+    transition: transform 0.3s ease;
+}
+
+.achievement-badge:hover {
+    transform: scale(1.1);
+}
+
+/* Buttons */
+.btn {
+    padding: 15px 25px;
+    border: none;
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #4CAF50, #66BB6A);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #F44336, #EF5350);
+    color: white;
+    margin-top: 20px;
+}
+
+.btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(244, 67, 54, 0.3);
+}
+
+/* Quick actions bar */
+.quick-actions {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border: 3px solid #81C784;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.quick-actions-title {
+    color: #2E7D32;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.quick-actions-grid {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.quick-action-btn {
+    padding: 12px 20px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.quick-action-btn:hover {
+    background: #388E3C;
+    transform: translateY(-2px);
+}
+
+/* Accessibility controls */
+.accessibility-controls {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.accessibility-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #4CAF50;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.accessibility-btn:hover {
+    background: #4CAF50;
+    color: white;
+}
+
+/* Logout section */
+.logout-section {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome-title {
+        font-size: 24px;
+    }
+
+    .mood-buttons {
+        gap: 10px;
+    }
+
+    .mood-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 28px;
+    }
+
+    .quick-actions-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Time-based greeting animation */
+.greeting-animation {
+    animation: fade-in 1s ease-in;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.achievement-badge {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.achievement-badge.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+/* Estilos para modales */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-dialog {
+    background: white;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.modal-content {
+    padding: 20px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #999;
+    padding: 0;
+    line-height: 1;
+}
+
+.btn-close:hover {
+    color: #000;
+}
+
+.modal-body {
+    margin-bottom: 15px;
+}
+
+.modal-footer {
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+    text-align: right;
+}
+
+
+/* Asegurar que los botones de logros sean clicables */
+.achievement-badge.unlocked {
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}
+
+.logout-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem; /* sólo afecta al contenedor del botón */
+}
+

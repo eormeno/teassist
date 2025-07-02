@@ -14,6 +14,7 @@ class PatientSeeder extends Seeder
 
     public function run(): void
     {
+        fake()->seed(2222);
         $therapists = Therapist::all();
         $therapistCount = $therapists->count();
         $i = 0;

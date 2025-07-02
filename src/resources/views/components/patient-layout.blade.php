@@ -2,12 +2,17 @@
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>{{ $title }}</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    
+   @vite(['resources/css/patient-dashboard.css'])
+
+
 </head>
-<body style="background-color: #E8F5E9; font-family: sans-serif;">
+
+<body style="background-color: #E8F5E9; ">
     <div class="container py-4">
         <header style="margin-bottom: 20px;">
             <h1>{{ $title }}</h1>
@@ -18,5 +23,5 @@
         </main>
     </div>
 </body>
-</html>
 
+</html>

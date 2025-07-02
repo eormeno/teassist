@@ -11,6 +11,13 @@
             </a>
         </div>
 
+        <!-- AGREGAR MENSAJE DE ÉXITO -->
+        @if(session('success'))
+            <div style="background: #d4edda; color: #155724; padding: 12px; border-radius: 8px; margin-bottom: 20px;">
+                ✅ {{ session('success') }}
+            </div>
+        @endif
+
         <h2 style="font-size: 28px; font-weight: 700; color: #2E7D32; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
             🎮 Mis actividades asignadas
         </h2>
@@ -24,14 +31,25 @@
                 <table style="width: 100%; border-collapse: separate; border-spacing: 0 8px;">
                     <thead>
                         <tr style="background: #e3f2fd; text-align: left; font-weight: 600; color: #2E7D32;">
-                            <th style="padding: 12px 16px; border-top-left-radius: 12px;">Nombre</th>
+                            <th style="padding: 12px 16px; border-top-left-radius: 12px;">Completada</th>
+                            <th style="padding: 12px 16px;">Nombre</th>
                             <th style="padding: 12px 16px;">Descripción</th>
                             <th style="padding: 12px 16px; text-align: center; border-top-right-radius: 12px;">Fecha</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($activities as $activity)
-                            <tr style="background: white; box-shadow: 0 3px 6px rgba(0,0,0,0.1); border-radius: 12px; transition: background 0.3s ease; cursor: default;">
+                            <tr style="background: {{ $activity->active ? '#e8f5e8' : 'white' }}; box-shadow: 0 3px 6px rgba(0,0,0,0.1); border-radius: 12px; transition: background 0.3s ease; cursor: default;">
+                                <td style="padding: 12px 16px; text-align: center;">
+                                    <form method="POST" action="{{ route('patient.activity.toggle', $activity->id) }}" style="display: inline;">
+                                        @csrf
+                                        @method('PATCH')
+                                        <input type="checkbox" 
+                                               onchange="this.form.submit()" 
+                                               {{ $activity->active ? 'checked' : '' }}
+                                               style="transform: scale(1.5); cursor: pointer;">
+                                    </form>
+                                </td>
                                 <td style="padding: 12px 16px; vertical-align: middle; color: #388E3C; font-weight: 600;">{{ $activity->activity->name }}</td>
                                 <td style="padding: 12px 16px; color: #4CAF50; font-size: 15px;">{{ $activity->activity->description }}</td>
                                 <td style="padding: 12px 16px; text-align: center; color: #2E7D32; font-weight: 700; vertical-align: middle;">

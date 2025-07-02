@@ -12,7 +12,9 @@ class TherapistSeeder extends Seeder
     use WithoutModelEvents;
 
     public function run(): void
+    
     {
+        fake()->seed(3333);
         $users = User::factory()
             ->count(5)
             ->create();

@@ -14,7 +14,9 @@ class ActivitySeeder extends Seeder
      * Run the database seeds.
      */
     public function run(): void
+
     {
+        fake()->seed(5555);
         Activity::factory()->count(3)->create();
     }
 }

@@ -9,6 +9,7 @@ class UsersSeeder extends Seeder
 {
     public function run(): void
     {
+        fake()->seed(1111);
         User::factory()->rootUser()->create()->assignRole('root');
         User::factory()->create()->assignRole('roles-admin');
         User::factory()->create()->assignRole('users-admin');

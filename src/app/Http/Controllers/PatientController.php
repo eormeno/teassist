@@ -112,7 +112,8 @@ class PatientController extends Controller
     {
         $mood = $request->input('mood');
 
-        auth()->user()->update(['last_mood' => $mood]);
+        $patient = Patient::where('user_id', auth()->id())->first();
+        $patient->update(['last_mood' => $mood]);
 
         return back()->with('success', 'Estado de ánimo registrado');
     }
@@ -125,10 +126,54 @@ class PatientController extends Controller
         }
 
         $patientName = $user->patient->name;
-        $activitiesCount = PatientActivity::where('patient_id', $patientName)->count();
+        $activitiesCount = $user->patient->activities()->count();
+        $activitiesCount = PatientActivity::where('patient_id', $user->patient->id)->count();
 
-        return view('patients.dashboard', compact('activitiesCount', 'patientName'));
+        // AGREGAR ESTAS LÍNEAS PARA EL PROGRESO:
+        $actividadesProgramadas = PatientActivity::where('patient_id', $user->patient->id)
+            ->whereBetween('activity_date', [now()->startOfWeek(), now()->endOfWeek()])
+            ->count();
 
+        $actividadesCompletadas = PatientActivity::where('patient_id', $user->patient->id)
+            ->where('active', true)
+            ->whereBetween('activity_date', [now()->startOfWeek(), now()->endOfWeek()])
+            ->count();
+
+        // Si no hay actividades esta semana, usar datos de ejemplo
+        if ($actividadesProgramadas == 0) {
+            $actividadesProgramadas = 5;
+            $actividadesCompletadas = 4;
+        }
+        $logros = [];
+
+        // Logro 1: Primera actividad completada
+        if (PatientActivity::where('patient_id', $user->patient->id)->where('active', true)->exists()) {
+            $logros[] = ['emoji' => '🎯', 'title' => 'Primera actividad completada', 'desbloqueado' => true];
+        } else {
+            $logros[] = ['emoji' => '❓', 'title' => 'Completa tu primera actividad', 'desbloqueado' => false];
+        }
+
+        // Logro 2: Expresó emociones
+        if ($user->patient->last_mood) {
+            $logros[] = ['emoji' => '💝', 'title' => 'Expresaste tus emociones', 'desbloqueado' => true];
+        } else {
+            $logros[] = ['emoji' => '❓', 'title' => 'Expresa cómo te sentís', 'desbloqueado' => false];
+        }
+
+        return view('patients.dashboard', compact('activitiesCount', 'patientName', 'actividadesCompletadas', 'actividadesProgramadas','logros'));
+    }
+    public function toggleActivity(Request $request, $activityId)
+    {
+        $activity = PatientActivity::where('id', $activityId)
+            ->where('patient_id', auth()->user()->patient->id)
+            ->firstOrFail();
+
+        $activity->active = !$activity->active;
+        $activity->save();
+
+        $message = $activity->active ? 'Actividad completada ✅' : 'Actividad marcada como pendiente ⏳';
+
+        return back()->with('success', $message);
     }
     public function logout(Request $request)
     {
@@ -137,7 +182,7 @@ class PatientController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect()->route('landing');
     }
 
 
