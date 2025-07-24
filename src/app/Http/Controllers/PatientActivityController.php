@@ -16,7 +16,16 @@ class PatientActivityController extends Controller
     public function index() {
         $patient_id = request()->get('patient_id');
         $patients = Patient::all();
-        $patientActivities = PatientActivity::where('patient_id', $patient_id)->paginate(5);
+        $perPage = config('app.pagination_count', 5);
+        $patientActivities = PatientActivity::where('patient_id', $patient_id)
+            ->orderBy('created_at', 'desc')
+            ->paginate($perPage)
+            ->appends(['patient_id' => $patient_id]);
+        $patientActivities->getCollection()->transform(function ($activity) {
+            $activity->performed_ago = $activity->created_at->diffForHumans();
+            return $activity;
+        });
+
         return view('patient-activities.index', compact('patientActivities', 'patients', 'patient_id'));
     }
 

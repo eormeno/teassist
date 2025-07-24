@@ -13,13 +13,26 @@ class PatientActivitiesApiController extends Controller
         if (!$patient) {
             return response()->json(['message' => 'Patient not found'], 404);
         }
-        $activities = PatientActivity::where('patient_id', $patient->id)->with('activity')->get();
-        $activities = $this->hidePatientActivitesResponseFields($activities);
-        $patient = $this->hidePatientResponseFields($patient);
+        // Paginado configurable
+        $perPage = config('app.pagination_count', 5);
+
+        // Actividades ordenadas por fecha reciente, paginadas
+        $activities = PatientActivity::where('patient_id', $patient->id)
+            ->with('activity')
+            ->orderBy('created_at', 'desc')
+            ->paginate($perPage);
+
+        $formattedActivities = $this->hidePatientActivitesResponseFields($activities->items());
+
         $response = [
-            'patient' => $patient,
-            'activities' => $activities
-        ];
+            'patient' => $patient = $this->hidePatientResponseFields($patient),
+            'activities' => $formattedActivities,
+            'pagination' => [
+                'current_page' => $activities->currentPage(),
+                'last_page' => $activities->lastPage(),
+                'per_page' => $activities->perPage(),
+                'total' => $activities->total(),
+        ]];
         return response()->json($response);
     }
 
@@ -46,6 +59,7 @@ class PatientActivitiesApiController extends Controller
                 'reasons' => $patientActivity->reasons,
                 'goals' => $patientActivity->goals,
                 'indicators' => $patientActivity->indicators,
+                'performed_ago' => $patientActivity->created_at->diffForHumans(),
             ];
         });
     }

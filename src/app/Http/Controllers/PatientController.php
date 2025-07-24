@@ -17,7 +17,8 @@ class PatientController extends Controller
      */
     public function index()
     {
-        $patients = Patient::latest()->paginate(5);
+        $perPage = config('app.pagination_count',5);
+        $patients = Patient::latest()->paginate($perPage);
         return view('patients.index', compact('patients'));
     }
 

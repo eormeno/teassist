@@ -46,6 +46,9 @@
                                 Descripción</th>
                             <th scope="col"
                                 class="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                                Fecha</th>
+                            <th scope="col"
+                                class="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
                                 Acciones</th>
                         </tr>
                     </thead>
@@ -56,6 +59,8 @@
                                     {{ $patient_activity->activity->name }}</td>
                                 <td class="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900">
                                     {{ Str::limit($patient_activity->activity->description, 30) }}</td>
+                                <td class="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    {{ Str::limit($patient_activity->performed_ago, 30) }}</td>
                                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
                                     <div class="flex items-center space-x-2">
                                         <a href="{{ route('patient-activities.show', $patient_activity) }}"

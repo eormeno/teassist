@@ -21,6 +21,22 @@ class PermissionsSeeder extends Seeder
     private const USERS_DISABLE = 'users-disable';
     private const USERS_ENABLE = 'users-enable';
 
+    private const PATIENTS_LIST = 'patients-list';
+    private const PATIENTS_CREATE = 'patients-create';
+    private const PATIENTS_EDIT = 'patients-edit';
+    private const PATIENTS_DELETE = 'patients-delete';
+    private const PATIENTS_SHOW = 'patients-show';
+
+    private const ACTIVITIES_LIST = 'activities-list';
+    private const ACTIVITIES_CREATE = 'activities-create';
+    private const ACTIVITIES_EDIT = 'activities-edit';
+    private const ACTIVITIES_DELETE = 'activities-delete';
+
+    private const PATIENT_ACTIVITIES_LIST = 'patient-activities-list';
+    private const PATIENT_ACTIVITIES_CREATE = 'patient-activities-create';
+    private const PATIENT_ACTIVITIES_EDIT = 'patient-activities-edit';
+    private const PATIENT_ACTIVITIES_DELETE = 'patient-activities-delete';
+
     private $permissions = [
         self::SEE_PANEL,
         self::ROLES_LIST,
@@ -33,6 +49,19 @@ class PermissionsSeeder extends Seeder
         self::USERS_DELETE,
         self::USERS_DISABLE,
         self::USERS_ENABLE,
+        self::PATIENTS_LIST,
+        self::PATIENTS_CREATE,
+        self::PATIENTS_EDIT,
+        self::PATIENTS_DELETE,
+        self::PATIENTS_SHOW,
+        self::ACTIVITIES_LIST,
+        self::ACTIVITIES_CREATE,
+        self::ACTIVITIES_EDIT,
+        self::ACTIVITIES_DELETE,
+        self::PATIENT_ACTIVITIES_LIST,
+        self::PATIENT_ACTIVITIES_CREATE,
+        self::PATIENT_ACTIVITIES_EDIT,
+        self::PATIENT_ACTIVITIES_DELETE,
     ];
 
     public function run(): void
@@ -45,6 +74,8 @@ class PermissionsSeeder extends Seeder
         }
 
         Role::create(['name' => 'root']);
+        #$root = Role::findByName('root');
+        #$root->givePermissionTo(Permission::all());
 
         $registered_role = Role::create(['name' => 'registered']);
         $registered_role->givePermissionTo(self::SEE_PANEL);
@@ -64,5 +95,23 @@ class PermissionsSeeder extends Seeder
         $users_admin->givePermissionTo(self::USERS_DELETE);
         $users_admin->givePermissionTo(self::USERS_DISABLE);
         $users_admin->givePermissionTo(self::USERS_ENABLE);
+
+        $therapist = Role::create(['name' => 'therapist']);
+        $therapist->givePermissionTo(self::SEE_PANEL);
+        $therapist->givePermissionTo(self::PATIENTS_LIST);
+        $therapist->givePermissionTo(self::PATIENTS_CREATE);
+        $therapist->givePermissionTo(self::PATIENTS_EDIT);
+        $therapist->givePermissionTo(self::PATIENTS_DELETE);
+        $therapist->givePermissionTo(self::PATIENTS_SHOW);
+
+        $therapist->givePermissionTo(self::ACTIVITIES_LIST);
+        $therapist->givePermissionTo(self::ACTIVITIES_CREATE);
+        $therapist->givePermissionTo(self::ACTIVITIES_EDIT);
+        $therapist->givePermissionTo(self::ACTIVITIES_DELETE);
+
+        $therapist->givePermissionTo(self::PATIENT_ACTIVITIES_LIST);
+        $therapist->givePermissionTo(self::PATIENT_ACTIVITIES_CREATE);
+        $therapist->givePermissionTo(self::PATIENT_ACTIVITIES_EDIT);
+        $therapist->givePermissionTo(self::PATIENT_ACTIVITIES_DELETE);
     }
 }

@@ -16,7 +16,8 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $data = User::latest()->paginate(7);
+        $perPage = config('app.pagination_count', 5);
+        $data = User::latest()->paginate($perPage);
         return view('users.index', compact('data'));
     }
 

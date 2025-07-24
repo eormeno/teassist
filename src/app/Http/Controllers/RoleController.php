@@ -27,7 +27,8 @@ class RoleController extends Controller implements HasMiddleware
 
     public function index(Request $request)
     {
-        $roles = Role::orderBy('id', 'DESC')->paginate(5);
+        $perPage = config('app.pagination_count',5);
+        $roles = Role::orderBy('id', 'DESC')->paginate($perPage);
         return view('roles.index', compact('roles'));
     }
 
