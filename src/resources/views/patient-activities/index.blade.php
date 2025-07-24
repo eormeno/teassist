@@ -52,6 +52,9 @@
                                                 Descripción</th>
                                             <th scope="col"
                                                 class="px-4 py-3 text-left text-xs font-extrabold text-white uppercase tracking-wider">
+                                                Asignada hace</th>
+                                            <th scope="col"
+                                                class="px-4 py-3 text-left text-xs font-extrabold text-white uppercase tracking-wider">
                                                 Acciones</th>
                                         </tr>
                                     </thead>
@@ -62,6 +65,8 @@
                                                     {{ $patient_activity->activity->name }}</td>
                                                 <td class="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900">
                                                     {{ Str::limit($patient_activity->activity->description, 30) }}</td>
+                                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">
+                                                    {{ $patient_activity->created_at->diffForHumans() }}</td>
                                                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
                                                     <div class="flex items-center space-x-2">
                                                         <a href="{{ route('patient-activities.show', $patient_activity) }}"
