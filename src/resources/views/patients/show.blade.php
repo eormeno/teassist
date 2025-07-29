@@ -81,7 +81,17 @@
                                 <strong>Observaciones:</strong>
                                 {{ $patient->observaciones }}
                             </div>
-                        </div>                        
+                        </div>                    
+                        <div class="col-xs-12 mb-3">
+                            <div class="form-group">
+                                <strong>Terapeuta:</strong>
+                                @if($patient->therapist)
+                                    {{ $patient->therapist->name }}
+                                @else
+                                    <em>No asignado</em>
+                                @endif                                
+                            </div>
+                        </div>                         
                     </div>
                 </div>
             </div>

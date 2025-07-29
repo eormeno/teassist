@@ -9,10 +9,12 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ContadorController;
 use App\Http\Controllers\PatientActivityController;
 
+// Rutas públicas
 Route::get('/', function () {
     return view('landing');
 })->name('landing');
 
+// Rutas de contador 
 Route::get('/contador', [ContadorController::class, 'index'])->name('contador');
 Route::get('/contador/incrementar/{número}', [ContadorController::class, 'incrementar'])->name('incrementar');
 Route::get('/contador/decrementar/{número}', [ContadorController::class, 'decrementar'])->name('decrementar');
@@ -20,18 +22,24 @@ Route::get('/contador/duplicar/{número}', [ContadorController::class, 'duplicar
 Route::get('/contador/resetear', [ContadorController::class, 'resetear'])->name('resetear');
 Route::post('/contador/reestablecer', [ContadorController::class, 'reestablecer'])->name('reestablecer');
 
-Route::resource('patients', PatientController::class)->middleware('auth');
-Route::resource('activities', ActivityController::class)->middleware('auth');
-Route::resource('patient-activities', PatientActivityController::class);
-
-
-Route::middleware('permission:see-panel')->group(function () {
+// Rutas accesibles para todos los autenticados 
+Route::middleware(['auth', 'permission:see-panel'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
 
+    Route::resource('patients', PatientController::class);
+    Route::resource('activities', ActivityController::class);
+    Route::resource('patient-activities', PatientActivityController::class);
     Route::get('/pull-events', [EventController::class, 'pullEvents'])->name('pull-events');
-    Route::resource('roles', RoleController::class);
-    Route::resource('users', UserController::class);
+});
 
+// Rutas solo para roles-admin
+Route::middleware(['auth', 'permission:roles-list|roles-create|roles-edit|roles-delete'])->group(function () {
+    Route::resource('roles', RoleController::class);
+});
+
+// Rutas solo para users-admin
+Route::middleware(['auth', 'permission:users-list|users-create|users-edit|users-delete|users-disable|users-enable'])->group(function () {
+    Route::resource('users', UserController::class);
 });

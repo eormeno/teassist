@@ -3,58 +3,84 @@
 namespace App\Http\Controllers;
 
 use App\Models\Patient;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\PatientRequest;
+use Spatie\Permission\Models\Role;
 
 class PatientController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $patients = Patient::latest()->paginate(5);
+        $user = auth()->user();
+
+        if ($user->hasRole('therapist')) {
+            $patients = Patient::where('therapist_id', $user->id)->latest()->paginate(5);
+        } else {
+            $patients = Patient::latest()->paginate(5);
+        }
+
         return view('patients.index', compact('patients'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view('patients.create');
+        $therapists = [];
+
+        if (auth()->user()->hasRole('root')) {
+            $therapists = \App\Models\User::role('therapist')->get();
+        }
+
+        return view('patients.create', compact('therapists'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(PatientRequest $request)
     {
-        Patient::create($request->validated());
+        $data = $request->validated();
+        $user = auth()->user();
+        if (auth()->user()->hasRole('root')) {
+            // Asignar terapeuta elegido por el root
+            $data['therapist_id'] = $request->input('therapist_id');
+        }
+
+        Patient::create($data);
         return redirect()->route('patients.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Patient $patient)
     {
+        $user = auth()->user();
+        if ($user->hasRole('therapist') && $patient->therapist_id !== $user->id) {
+            abort(403, 'No autorizado.');
+        }
         return view('patients.show', compact('patient'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Patient $patient)
     {
-        return view('patients.edit', compact('patient'));
+        $user = auth()->user();
+        if ($user->hasRole('therapist') && $patient->therapist_id !== $user->id) {
+            abort(403, 'No autorizado.');
+        }
+
+        $therapists = [];
+
+        if ($user->hasRole('root')) {
+            $therapists = User::role('therapist')->get();
+        }
+
+        return view('patients.edit', compact('patient', 'therapists'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, Patient $patient)
     {
+        $user = auth()->user();
+
+        if ($user->hasRole('therapist') && $patient->therapist_id !== $user->id) {
+            abort(403, 'No autorizado.');
+        }
+
         $request->validate([
             'codigo' => 'required|unique:patients,codigo,' . $patient->id,
             'apellidos' => 'required',
@@ -65,16 +91,28 @@ class PatientController extends Controller
             'telefono' => 'required',
             'email' => 'required|email|unique:patients,email,' . $patient->id,
             'direccion' => 'required',
+            'therapist_id' => 'nullable|exists:users,id',
         ]);
-        $patient->update($request->all());
+
+        $data = $request->all();
+
+        if ($user->hasRole('root') && $request->has('therapist_id')) {
+            $data['therapist_id'] = $request->input('therapist_id');
+        }
+
+        $patient->update($data);
+
+
         return redirect()->route('patients.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Patient $patient)
     {
+        $user = auth()->user();
+        if ($user->hasRole('therapist') && $patient->therapist_id !== $user->id) {
+            abort(403, 'No autorizado.');
+        }
         $patient->delete();
         return redirect()->route('patients.index');
     }

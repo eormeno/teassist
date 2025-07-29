@@ -20,5 +20,12 @@ class Patient extends Model
         'email',
         'direccion',
         'observaciones',
+        'therapist_id',  // nuevo campo
     ];
+
+    // Relación paciente → terapeuta
+    public function therapist()
+    {
+        return $this->belongsTo(User::class, 'therapist_id');
+    }
 }

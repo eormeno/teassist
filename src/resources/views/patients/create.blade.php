@@ -82,6 +82,18 @@
                                 class="border-gray-300 dark:border-gray-700 rounded-md shadow-sm block mt-1 w-full"
                                 required>{{ old('observaciones') }}</textarea>
                         </div>
+                        @if(auth()->user()->hasRole ('root'))
+                            <div class="mt-2">
+                                <x-label style="color: #000000;" for="therapist_id" value="Terapeuta asignado" />
+                                <select name="therapist_id" id="therapist_id" class="border-gray-300 dark:border-gray-700 rounded-md shadow-sm block mt-1 w-full">
+                                    <option value="">-- Seleccione un terapeuta --</option>
+                                    @foreach($therapists as $therapist)
+                                        <option value="{{ $therapist->id }}">{{ $therapist->name }}</option>
+                                    @endforeach
+                                </select>
+                                <x-input-error for="therapist_id" class="mt-2" />
+                            </div>
+                        @endif
                         <div class="flex items-center justify-end mt-4">
                             <x-button style="background:#4f46e5; color: white;" class=" ms-4">Crear paciente </x-button>
                         </div>

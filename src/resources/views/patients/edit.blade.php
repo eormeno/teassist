@@ -63,6 +63,19 @@
                             <x-label for="observaciones" style="color: #000000;" value="Observaciones"/>
                             <textarea name="observaciones">{{$patient->observaciones}}</textarea>
                         </div>
+                        @role('root')
+                            <div class="mt-4">
+                                <x-label for="therapist_id" style="color: #000000;" value="Terapeuta asignado" />
+                                <select name="therapist_id" id="therapist_id" class="border-gray-300 dark:border-gray-700 rounded-md shadow-sm block mt-1 w-full" required>
+                                    <option value="">-- Seleccione un terapeuta --</option>
+                                    @foreach($therapists as $therapist)
+                                        <option value="{{ $therapist->id }}" {{ $patient->therapist_id == $therapist->id ? 'selected' : '' }}>
+                                            {{ $therapist->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endrole
                         <div class="flex items-center justify-end mt-4">
                             <x-button class="ms-4 py-4 px-6 text-xl" style="background-color: #4f46e5; color: white;" type="submit">
                                 Editar Paciente

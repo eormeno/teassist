@@ -15,38 +15,25 @@
                          organización.
                     </div>
                 @endrole
+                @role('therapist')
+                    <div class="m-4 text-xl text-black ">
+                        <b>Usted está registrado en el sistema como terapeuta.</b><br> Puede visualizar sus pacientes, como así también crear actividades y asignar las mismas a sus pacientes.
+                    </div>
+                @endrole
+                @role('users-admin')
+                    <div class="m-4 text-xl text-black ">
+                        <b>Usted está registrado en el sistema como users-admin.</b><br> Puede administrar los usuarios.
+                    </div>
+                @endrole
+                @role('roles-admin')
+                    <div class="m-4 text-xl text-black ">
+                        <b>Usted está registrado en el sistema como roles-admin.</b><br> Puede administrar los roles.
+                    </div>
+                @endrole
                 @role('root')
                     <div class="m-4 text-xl text-black">
-                        <b>Usted es usuario raíz.</b><br> Puede acceder a todas las funcionalidades del sistema.
+                        <b>Usted es usuario root.</b><br> Puede acceder a todas las funcionalidades del sistema.
                     </div>
-                @else
-                    @can('roles-list')
-                        <p>Roles List</p>
-                    @endcan
-                    @can('roles-create')
-                        <p>Roles Create</p>
-                    @endcan
-                    @can('roles-edit')
-                        <p>Roles Edit</p>
-                    @endcan
-                    @can('roles-delete')
-                        <p>Roles Delete</p>
-                    @endcan
-                    @can('users-list')
-                        <p>Users List</p>
-                    @endcan
-                    @can('users-create')
-                        <p>Users Create</p>
-                    @endcan
-                    @can('users-edit')
-                        <p>Users Edit</p>
-                    @endcan
-                    @can('users-delete')
-                        <p>Users Delete</p>
-                    @endcan
-                    @can('root user')
-                        <p>Root User</p>
-                    @endcan
                 @endrole
             </div>
         </div>

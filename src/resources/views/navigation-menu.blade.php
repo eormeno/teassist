@@ -1,3 +1,7 @@
+@php
+    use Illuminate\Support\Facades\Auth;
+@endphp
+
 <nav x-data="{ open: false }" class="bg-white">
     <!-- Primary Navigation Menu -->
     <div class=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -9,26 +13,39 @@
                 </div>
 
                 <!-- Navigation Links -->
+                @can('see-panel')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link  href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Inicio') }}
                     </x-nav-link>
                 </div>
+                @endcan
+
+                @role('roles-admin|root')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('roles.index') }}" :active="request()->routeIs('roles.index')">
                         {{ __('Roles') }}
                     </x-nav-link>
                 </div>
+                @endrole
+
+                @role('users-admin|root')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
                         {{ __('Usuarios') }}
                     </x-nav-link>
                 </div>
+                @endrole
+
+                @role('therapist|root')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('patients.index') }}" :active="request()->routeIs('patients.index')">
                         {{ __('Pacientes') }}
                     </x-nav-link>
                 </div>
+                @endrole
+
+                @hasanyrole('therapist|registered|root')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('activities.index') }}" :active="request()->routeIs('activities.index')">
                         {{ __('Actividades') }}
@@ -39,8 +56,10 @@
                         {{ __('Actividades de Pacientes') }}
                     </x-nav-link>
                 </div>
-
+                @endhasanyrole
             </div>
+
+
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <!-- Teams Dropdown -->

@@ -10,75 +10,144 @@ use App\Http\Requests\UpdatePatientActivityRequest;
 
 class PatientActivityController extends Controller
 {
-    public function index() {
+    public function index()
+    {
+        $user = auth()->user();
         $patient_id = request()->get('patient_id');
-        $patients = Patient::all();
-        $patientActivities = PatientActivity::where('patient_id', $patient_id)->paginate(5);
+        $patients = [];
+
+        if ($user->hasRole('therapist')) {
+            // Mostrar solo pacientes del terapeuta para filtro
+            $patients = $user->therapistPatients()->get();
+
+            // Si pidieron un paciente que no es del terapeuta, abortar
+            if ($patient_id && !$patients->contains('id', $patient_id)) {
+                abort(403, 'No autorizado.');
+            }
+
+            $patientActivities = PatientActivity::where('patient_id', $patient_id)->paginate(5);
+
+        } elseif ($user->hasRole('paciente')) {
+            // Paciente sólo ve sus propias actividades
+            $patient = Patient::where('codigo', $user->email)->first(); 
+            // Nota: este método depende de que el email usuario sea igual al código paciente (deberás ajustar según tu lógica)
+            if (!$patient) {
+                abort(403, 'No autorizado.');
+            }
+            $patientActivities = PatientActivity::where('patient_id', $patient->id)->paginate(5);
+            $patients = collect([$patient]);
+            $patient_id = $patient->id;
+
+        } else {
+            // Otros roles ven todo normalmente
+            $patients = Patient::all();
+            $patientActivities = PatientActivity::where('patient_id', $patient_id)->paginate(5);
+        }
+
         return view('patient-activities.index', compact('patientActivities', 'patients', 'patient_id'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
+        $user = auth()->user();
         $patient_id = request()->get('patient_id');
+
+        // Verificación para terapeutas
+        if ($user->hasRole('therapist')) {
+            // Solo permite asignar a pacientes propios
+            if (!$user->therapistPatients->pluck('id')->contains($patient_id)) {
+                abort(403, 'No autorizado.');
+            }
+        }
+
         $patient = Patient::find($patient_id);
         $patient_full_name = $patient->apellidos . ', ' . $patient->nombres;
         $activities = Activity::all();
         return view('patient-activities.create', compact('activities', 'patient_id', 'patient_full_name'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StorePatientActivityRequest $request)
     {
-        $user_id = auth()->user()->id;
+        $user = auth()->user();
         $patient_id = request()->get('patient_id');
         $validated = $request->validated();
-        $validated['user_id'] = $user_id;
+
+        // Si es terapeuta, verificar que el paciente sea suyo
+        if ($user->hasRole('therapist')) {
+            if (!$user->therapistPatients->pluck('id')->contains($patient_id)) {
+                abort(403, 'No autorizado.');
+            }
+        }
+
+        $validated['user_id'] = $user->id;
         $validated['patient_id'] = $patient_id;
         PatientActivity::create($validated);
         return redirect()->route('patient-activities.index', ['patient_id' => $patient_id]);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(PatientActivity $patientActivity)
     {
+        $user = auth()->user();
+        // Si es terapeuta, solo puede ver actividades de sus pacientes
+        if ($user->hasRole('therapist')) {
+            if ($patientActivity->patient->therapist_id !== $user->id) {
+                abort(403, 'No autorizado.');
+            }
+        }
+        // Paciente solo ve sus actividades
+        if ($user->hasRole('paciente')) {
+            $patient = Patient::where('codigo', $user->email)->first();
+            if (!$patient || $patient->id !== $patientActivity->patient_id) {
+                abort(403, 'No autorizado.');
+            }
+        }
         return view('patient-activities.show', compact('patientActivity'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(PatientActivity $patientActivity)
     {
+        $user = auth()->user();
+
+        if ($user->hasRole('therapist')) {
+            if ($patientActivity->patient->therapist_id !== $user->id) {
+                abort(403, 'No autorizado.');
+            }
+        }
+
         $patient = $patientActivity->patient;
         $patient_full_name = $patient->apellidos . ', ' . $patient->nombres;
         $activities = Activity::all();
         return view('patient-activities.edit', compact('patientActivity', 'activities', 'patient_full_name'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdatePatientActivityRequest $request, PatientActivity $patientActivity)
     {
-        $patient_id = $patientActivity->patient_id;
+        $user = auth()->user();
+
+        if ($user->hasRole('therapist')) {
+            if ($patientActivity->patient->therapist_id !== $user->id) {
+                abort(403, 'No autorizado.');
+            }
+        }
+
         $validated = $request->validated();
         $patientActivity->update($validated);
-        return redirect()->route('patient-activities.index', ['patient_id' => $patient_id]);
+
+        return redirect()->route('patient-activities.index', ['patient_id' => $patientActivity->patient_id]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(PatientActivity $patientActivity)
     {
+        $user = auth()->user();
+
+        if ($user->hasRole('therapist')) {
+            if ($patientActivity->patient->therapist_id !== $user->id) {
+                abort(403, 'No autorizado.');
+            }
+        }
+
         $patientActivity->delete();
+
         return redirect()->route('patient-activities.index', ['patient_id' => $patientActivity->patient_id]);
     }
 }
