@@ -63,4 +63,25 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // Usuarios con rol de paciente
+    public function patient()
+    {
+        return $this->hasOne(Patient::class);
+    }
+    //Pacientes asignados a un terapeuta
+    public function assignedPatients()
+    {
+        return $this->belongsToMany(User::class, 'patient_therapist', 'therapist_id', 'patient_id');
+    }
+    // Terapeutas asignados a un paciente
+    public function therapists()
+    {
+        return $this->belongsToMany(User::class, 'patient_therapist', 'patient_id', 'therapist_id');
+    }
+    // Alias para acceder directamente a los datos de pacientes asignados
+    public function myPatients()
+    {
+        return $this->assignedPatients()->with('patient');
+    }
 }

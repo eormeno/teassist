@@ -38,6 +38,25 @@
                                 @endforeach
                             </select>
                         </div>
+                        @php
+                            $therapists = \App\Models\User::role('therapist')->get();
+                        @endphp
+
+                        <div id="therapist-select" class="mt-4">
+                            <x-label for="therapist_id" value="Asignar terapeuta" />
+                            <select name="therapist_ids[]" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm" multiple>
+                                <option value="">No definido</option>
+                                @php
+                                    $selectedTherapists = old('therapist_ids', $user->therapists->pluck('id')->toArray() ?? []);
+                                @endphp
+                                @foreach ($therapists as $therapist)
+                                <option value="{{ $therapist->id }}"
+                                    {{ in_array($therapist->id, $selectedTherapists) ? 'selected' : '' }}>
+                                    {{ $therapist->name }} ({{ $therapist->email }})
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
 
                         <div class="flex items-center justify-end mt-4">
                             <x-button class="ms-4">

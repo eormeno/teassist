@@ -44,12 +44,16 @@
                     </div>
                     <div class="ml-auto h-2/4">
                     <a href="{{ route('login') }}"
-                       class="mx-2 px-2 py-2 bg-azullogo border-2 border-blue text-white text-lg font-semibold rounded-md inline-block text-center hover:border-white/70 hover:text-white hover:bg-azullogo/60 focus:outline-none">Ingresar</a>
+                       class="mx-2 px-2 py-2 bg-azullogo border-2 border-blue text-white text-lg font-semibold rounded-md inline-block text-center hover:border-white/70 hover:text-white hover:bg-azullogo/60 focus:outline-none">
+                            Ingresar</a>
                     @if (Route::has('register'))
                         <a href="{{ route('register') }}"
                            class="mx-2 px-2 py-2 bg-azullogo border-2 border-blue text-white text-lg font-semibold rounded-md inline-block text-center hover:border-white/70 hover:text-white hover:bg-azullogo/60 focus:outline-none">
-                            Registrarse
+                                Registrarse
                         </a>
+                        <a href="{{ route('patient.login') }}"
+                            class="mx-2 px-2 py-2 bg-azullogo border-2 border-blue text-white text-lg font-semibold rounded-md inline-block text-center hover:border-white/70 hover:text-white hover:bg-azullogo/60 focus:outline-none">
+                                Pacientes</a>
                     </div>
                     @endif
                 @endauth

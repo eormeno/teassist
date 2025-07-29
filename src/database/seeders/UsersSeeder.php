@@ -13,9 +13,12 @@ class UsersSeeder extends Seeder
         User::factory()->create()->assignRole('roles-admin');
         User::factory()->create()->assignRole('users-admin');
 
-        User::factory()->count(7)->create()->each(function ($user) {
+        User::factory()->count(5)->create()->each(function ($user) {
             $user->assignRole('registered');
         });
 
+        User::factory()->count(3)->create()->each(function ($user) {
+            $user->assignRole('therapist');
+        });
     }
 }

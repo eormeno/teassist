@@ -7,20 +7,44 @@ use App\Models\Activity;
 use App\Traits\DebugHelper;
 use App\Traits\ToastTrigger;
 use App\Models\PatientActivity;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePatientActivityRequest;
 use App\Http\Requests\UpdatePatientActivityRequest;
-
+use Carbon\Carbon;
 class PatientActivityController extends Controller
 {
     use DebugHelper, ToastTrigger;
     public function index() {
-        $patient_id = request()->get('patient_id');
-        $patients = Patient::all();
+        $user = Auth::user();
         $perPage = config('app.pagination_count', 5);
-        $patientActivities = PatientActivity::where('patient_id', $patient_id)
+
+        // Obtener IDs de pacientes asignados si el usuario es terapeuta
+        if ($user->hasRole('therapist')) {
+            $allowedPatientIds = \DB::table('patient_therapist')
+                ->where('therapist_id', $user->id)
+                ->pluck('patient_id');
+        } else {
+            // Admin u otros roles ven todos los pacientes
+            $allowedPatientIds = Patient::pluck('user_id'); // Asumiendo que 'user_id' es la FK en 'patients'
+        }
+
+        $patient_id = request()->get('patient_id');
+
+        $patients = Patient::whereIn('user_id', $allowedPatientIds)->get();
+
+        // Consulta filtrada por paciente si viene el parámetro, si no, mostrar todas las actividades de los pacientes permitidos
+        $query = PatientActivity::whereIn('patient_id', $patients->pluck('id'));
+
+        if ($patient_id) {
+            $query->where('patient_id', $patient_id);
+        }
+
+        $patientActivities = $query
             ->orderBy('created_at', 'desc')
             ->paginate($perPage)
             ->appends(['patient_id' => $patient_id]);
+
+        // Transformar para mostrar "hace X tiempo"
         $patientActivities->getCollection()->transform(function ($activity) {
             $activity->performed_ago = $activity->created_at->diffForHumans();
             return $activity;
@@ -94,4 +118,22 @@ class PatientActivityController extends Controller
         $this->successToast('Actividad de Usuario Eliminada con Exito');
         return redirect()->route('patient-activities.index', ['patient_id' => $patientActivity->patient_id]);
     }
+
+    public function markAsCompleted($id)
+    {
+        $activity = PatientActivity::findOrFail($id);
+
+        // Solo el paciente asignado puede marcar su actividad
+        $patient = auth()->user()->patient;
+        if ($activity->patient_id !== $patient->id) {
+            abort(403, 'No autorizado');
+        }
+
+        $activity->completed_at = Carbon::today(); // Solo fecha
+        $activity->save();
+
+        return back()->with('success', '¡Actividad marcada como completada!');
+    }
+
 }
+

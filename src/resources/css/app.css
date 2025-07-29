@@ -14,3 +14,35 @@
     height: 1rem;
     background: linear-gradient(to left, theme('colors.azullogo') 33%, theme('colors.grislogo') 33% 66%, theme('colors.rojologo') 66%);
     margin: auto;}
+
+    .assigned-activities-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .assigned-activity-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #5363f8;
+        padding: 10px;
+        margin-bottom: 8px;
+        border-radius: 8px;
+    }
+
+    .completed-label {
+        color: green;
+        font-weight: bold;
+    }
+
+    .mood-btn {
+        font-size: 2rem;
+        border: none;
+        background: none;
+        cursor: pointer;
+        margin: 0 5px;
+        transition: transform 0.2s;
+    }
+    .mood-btn:hover {
+        transform: scale(1.2);
+    }

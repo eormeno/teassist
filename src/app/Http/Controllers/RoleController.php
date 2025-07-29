@@ -11,19 +11,9 @@ use Spatie\Permission\Models\Permission;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
 
-class RoleController extends Controller implements HasMiddleware
+class RoleController extends Controller
 {
     use ToastTrigger, DebugHelper;
-
-    public static function middleware()
-    {
-        return [
-            new Middleware('permission:role-list|role-create|role-edit|role-delete', only: ['index', 'show']),
-            new Middleware('permission:role-create', only: ['create', 'store']),
-            new Middleware('permission:role-edit', only: ['edit', 'update']),
-            new Middleware('permission:role-delete', only: ['destroy']),
-        ];
-    }
 
     public function index(Request $request)
     {

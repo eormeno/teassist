@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Patient;
 use App\Traits\DebugHelper;
 use App\Traits\ToastTrigger;
 use Illuminate\Http\Request;
@@ -17,7 +18,14 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $perPage = config('app.pagination_count', 5);
+        /* $data = User::whereDoesntHave('roles', function ($query) {
+            $query->where('name', 'patient');
+        })
+        ->orWhereHas('roles', function ($query) {
+            $query->where('name', '!=', 'patient');
+        })->paginate($perPage); */
         $data = User::latest()->paginate($perPage);
+
         return view('users.index', compact('data'));
     }
 
@@ -64,7 +72,8 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => "required|email|unique:users,email,$id",
-            'roles' => 'required'
+            'roles' => 'required',
+            'therapist_id' => 'nullable|exists:users,id'
         ]);
 
         $input = $request->all();
@@ -73,6 +82,37 @@ class UserController extends Controller
         DB::table('model_has_roles')->where('model_id', $id)->delete();
 
         $user->assignRole($request->input('roles'));
+       /*  if ($user->hasRole('patient')) {
+            Patient::firstOrCreate(
+                ['user_id' => $user->id], // Verifica por user_id, que debería ser único
+                [ */
+        if ($user->hasRole('patient') && !$user->patient) {
+            $patient = Patient::create([
+                'user_id' => $user->id,
+                'codigo' => fake()->unique()->regexify('[A-Z]{3}[0-9]{3}'),
+                'apellidos' => explode(' ', $user->name)[1] ?? 'Apellido',
+                'nombres' => explode(' ', $user->name)[0] ?? 'Nombre',
+                'dni' => fake()->unique()->numerify('########'),
+                'nacimiento' => fake()->date(),
+                'sexo' => fake()->randomElement(['M', 'F']),
+                'telefono' => fake()->phoneNumber(),
+                'email' => $user->email,
+                'direccion' => 'Sin asignar',
+                'observaciones' => 'Registrado por admin',
+            ]);
+        }
+        if ($user->hasRole('patient')) {
+            $therapistIds = $request->input('therapist_ids', []);
+
+            // Obtener solo terapeutas válidos
+            $validTherapists = User::role('therapist')
+                ->whereIn('id', $therapistIds)
+                ->pluck('id')
+                ->toArray();
+
+            // El paciente puede tener varios terapeutas → actualizamos todas las relaciones
+            $user->therapists()->sync($validTherapists);
+        }
         $this->infoToast('Usuario Actualizado');
         return redirect()->route('users.index');
     }

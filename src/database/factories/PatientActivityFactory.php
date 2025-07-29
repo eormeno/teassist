@@ -22,11 +22,14 @@ class PatientActivityFactory extends Factory
         $users = User::all();
         $patients = Patient::all();
         $activities = Activity::all();
+        $patient = $patients->random();
+        $activity = $activities->random();
+
 
         return [
-            'user_id' => $users->random()->id,
-            'patient_id' => $patients->random()->id,
-            'activity_id' => $activities->random()->id,
+            'user_id' => $patient->user_id,
+            'patient_id' => $patient->id,
+            'activity_id' => $activity->id,
             'active' => $this->faker->boolean,
             'description' => $this->faker->text,
             'reasons' => $this->faker->text,

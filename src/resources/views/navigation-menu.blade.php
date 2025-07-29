@@ -16,32 +16,47 @@
                         {{ __('Inicio') }}
                     </x-nav-link>
                 </div>
+
                 <!-- Navigation Links for Roles, Users and Patients -->
+                @can('roles-list')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('roles.index') }}" :active="request()->routeIs('roles.index')">
                         {{ __('Roles') }}
                     </x-nav-link>
                 </div>
+                @endcan
+
+                @can('users-list')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
                         {{ __('Usuarios') }}
                     </x-nav-link>
                 </div>
+                @endcan
+
+                @can('patients-list')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('patients.index') }}" :active="request()->routeIs('patients.index')">
                         {{ __('Pacientes') }}
                     </x-nav-link>
                 </div>
+                @endcan
+
+                @can('activities-list')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('activities.index') }}" :active="request()->routeIs('activities.index')">
                         {{ __('Actividades') }}
                     </x-nav-link>
                 </div>
+                @endcan
+
+                @can('patient-activities-list')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('patient-activities.index') }}" :active="request()->routeIs('patient-activities.index')">
                         {{ __('Actividades de Pacientes') }}
                     </x-nav-link>
                 </div>
+                @endcan
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -180,21 +195,35 @@
                 {{ __('Inicio') }}
             </x-responsive-nav-link>
             <!-- Responsive Navigation Link for Roles, Users and Patients -->
+            @can('roles-list')
             <x-responsive-nav-link href="{{ route('roles.index') }}" :active="request()->routeIs('roles.index')">
                 {{ __('Roles') }}
             </x-responsive-nav-link>
+            @endcan
+
+            @can('users-list')
             <x-responsive-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
                 {{ __('Usuarios') }}
             </x-responsive-nav-link>
+            @endcan
+
+            @can('patients-list')
             <x-responsive-nav-link href="{{ route('patients.index') }}" :active="request()->routeIs('patients.index')">
                 {{ __('Pacientes') }}
             </x-responsive-nav-link>
+            @endcan
+
+            @can('activities-list')
             <x-responsive-nav-link href="{{ route('activities.index') }}" :active="request()->routeIs('activities.index')">
                 {{ __('Actividades') }}
             </x-responsive-nav-link>
+            @endcan
+
+            @can('patientactivities-list')
             <x-responsive-nav-link href="{{ route('patient-activities.index') }}" :active="request()->routeIs('patient-activities.index')">
                 {{ __('Actividades de Pacientes') }}
             </x-responsive-nav-link>
+            @endcan
         </div>
 
         <!-- Responsive Settings Options -->

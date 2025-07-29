@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('codigo')->unique();
             $table->string('apellidos');
             $table->string('nombres');
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->string('direccion');
             $table->text('observaciones')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

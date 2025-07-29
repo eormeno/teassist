@@ -113,5 +113,8 @@ class PermissionsSeeder extends Seeder
         $therapist->givePermissionTo(self::PATIENT_ACTIVITIES_CREATE);
         $therapist->givePermissionTo(self::PATIENT_ACTIVITIES_EDIT);
         $therapist->givePermissionTo(self::PATIENT_ACTIVITIES_DELETE);
+
+        $patient = Role::create(['name' => 'patient']);
+        $patient->givePermissionTo(self::SEE_PANEL);
     }
 }
