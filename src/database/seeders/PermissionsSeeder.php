@@ -63,7 +63,7 @@ class PermissionsSeeder extends Seeder
 
         // Nuevos roles
         $therapist = Role::firstOrCreate(['name' => 'therapist']);
-        $paciente = Role::firstOrCreate(['name' => 'paciente']);
+        $patient = Role::firstOrCreate(['name' => 'patient']);
 
         // Permisos por rol
         $root->syncPermissions(Permission::all());
@@ -95,7 +95,7 @@ class PermissionsSeeder extends Seeder
             self::SEE_ACTIVITIES,
         ]);
 
-        $paciente->syncPermissions([
+        $patient->syncPermissions([
             self::SEE_PANEL,
             self::SEE_ACTIVITIES,
             self::ACCESS_AS_PATIENT,

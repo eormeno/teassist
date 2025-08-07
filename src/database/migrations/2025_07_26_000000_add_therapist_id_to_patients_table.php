@@ -9,11 +9,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('patients', function (Blueprint $table) {
-            $table->foreignId('therapist_id')
-                ->nullable()
-                ->constrained('users')
-                ->onDelete('set null')
-                ->after('id');
+            $table->unsignedBigInteger('therapist_id')->nullable(); // columna que almacena el ID del terapeuta
+            $table->foreign('therapist_id')->references('id')->on('therapists')->onDelete('set null'); // relación con la tabla therapists
         });
     }
 
@@ -22,6 +19,6 @@ return new class extends Migration
         Schema::table('patients', function (Blueprint $table) {
             $table->dropForeign(['therapist_id']);
             $table->dropColumn('therapist_id');
-        });
+        });     
     }
 };

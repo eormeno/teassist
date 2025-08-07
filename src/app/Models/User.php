@@ -51,6 +51,11 @@ class User extends Authenticatable
         return $this->hasMany(Patient::class, 'therapist_id');
     }
 
+    public function patient()
+    {
+    return $this->hasOne(Patient::class);
+    }
+    
     // App\Models\User
     public function therapist()
     {
