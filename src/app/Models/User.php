@@ -10,6 +10,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -49,4 +50,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Patient::class, 'therapist_id');
     }
+
+    // App\Models\User
+    public function therapist()
+    {
+        return $this->hasOne(Therapist::class);
+    }
+
 }

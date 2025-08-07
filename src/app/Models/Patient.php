@@ -24,8 +24,18 @@ class Patient extends Model
     ];
 
     // Relación paciente → terapeuta
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function activities()
+    {
+        return $this->hasMany(PatientActivity::class);
+    }
+
     public function therapist()
     {
-        return $this->belongsTo(User::class, 'therapist_id');
+        return $this->belongsTo(Therapist::class);
     }
 }
