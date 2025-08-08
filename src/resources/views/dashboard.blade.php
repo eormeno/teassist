@@ -35,6 +35,31 @@
                         <b>Usted es usuario root.</b><br> Puede acceder a todas las funcionalidades del sistema.
                     </div>
                 @endrole
+                @role('patient')
+                    <div class="m-4 text-xl text-black">
+                        <b>Usted es un paciente.</b> Puede ver sus actividades designadas.
+                    </div>
+                    @php
+                        $patient = Auth::user()->patient;
+                        $activities = $patient ? $patient->activities : collect();
+                    @endphp
+
+                    @if ($activities->isEmpty())
+                        <p class="text-gray-600 m-4">No tiene actividades asignadas.</p>
+                    @else
+                        <div class="m-4">
+                            <h2 class="text-lg font-bold mb-2">Actividades:</h2>
+                            <ul class="list-disc list-inside">
+                                @foreach ($activities as $activity)
+                                    <li>
+                                        <span class="font-semibold">{{ $activity->description ?? 'Sin titulo' }}</span><br>
+                                        <span class="text-sm text-gray-600">{{ $activity->reasons ?? 'Sin descripción' }}</span>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                @endrole
             </div>
         </div>
     </div>

@@ -8,6 +8,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ContadorController;
 use App\Http\Controllers\PatientActivityController;
+use App\Http\Controllers\Auth\PatientAuthController;
 
 // Rutas públicas
 Route::get('/', function () {
@@ -43,3 +44,18 @@ Route::middleware(['auth', 'permission:roles-list|roles-create|roles-edit|roles-
 Route::middleware(['auth', 'permission:users-list|users-create|users-edit|users-delete|users-disable|users-enable'])->group(function () {
     Route::resource('users', UserController::class);
 });
+
+
+
+// Mostrar formulario de login del paciente
+Route::get('/patient-login', [PatientAuthController::class, 'showLoginForm'])->name('patient.login');
+
+// Procesar login del paciente
+Route::post('/patient-login', [PatientAuthController::class, 'login'])->name('patient.login.submit');
+
+
+// Route::middleware(['auth', 'role:patient'])->group(function () {
+//     Route::get('/patient/dashboard', function () {
+//         return view('dashboard'); // O cualquier vista específica para pacientes
+//     })->name('patient.dashboard');
+// });

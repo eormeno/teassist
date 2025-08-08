@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TEApp</title>
+    <title>TEASSIST</title>
     @vite('resources/css/landing.css')
 </head>
 
@@ -14,7 +14,7 @@
     <header class=" text-red-400 py-6 shadow-lg ">
         <div class="container mx-auto flex justify-between items-center px-3">
             <img src="{{ asset('images/autis3.jpeg') }}" class="w-50 h-20 float-start" alt="logo">
-            <h1 class="text-4xl font-extrabold">Software para Personas con Diagnóstico de Autismo</h1>
+            <h1 class="text-4xl font-extrabold">TEASSIST</h1>
             @if (Route::has('login'))
                 <nav class="flex flex-wrap justify-between items-center space-y-4 lg:space-y-0 lg:space-x-10">
                     @auth
@@ -24,12 +24,16 @@
                         </a>
                     @else
                         <a href="{{ route('login') }}"
-                            class="font-extrabold bg-blue-800 text-white rounded-md px-5 py-3 transition hover:bg-blue-500 shadow-md">
+                            class="font-extrabold bg-blue-800 text-white rounded-md px-3 py-3 transition hover:bg-blue-500 shadow-md">
                             Ingresar
+                        </a>
+                        <a href="{{ route('patient.login') }}"
+                            class="font-extrabold bg-indigo-800 text-white rounded-md px-3 py-3 transition hover:bg-indigo-500 shadow-md">
+                            Ingresar como paciente
                         </a>
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}"
-                                class="font-extrabold bg-green-800 text-white rounded-md px-5 py-3 transition hover:bg-green-500 shadow-md">
+                                class="font-extrabold bg-green-800 text-white rounded-md px-3 py-3 transition hover:bg-green-500 shadow-md">
                                 Registrarse
                             </a>
                         @endif
