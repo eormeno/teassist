@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::table('patients', function (Blueprint $table) {
             $table->unsignedBigInteger('therapist_id')->nullable(); // columna que almacena el ID del terapeuta
-            $table->foreign('therapist_id')->references('id')->on('therapists')->onDelete('set null'); // relación con la tabla therapists
+            $table->foreign('therapist_id')->references('id')->on('users')->onDelete('set null'); // relación con la tabla therapists
         });
     }
 

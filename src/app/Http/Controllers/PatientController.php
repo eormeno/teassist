@@ -14,8 +14,9 @@ class PatientController extends Controller
     {
         $user = auth()->user();
 
-        if ($user->hasRole('therapist')) {
-            $patients = Patient::where('therapist_id', $user->id)->latest()->paginate(5);
+        if ($user->hasRole('therapist')&& $user->therapist) {
+            $therapistId=$user->therapist->id;
+            $patients = Patient::where('therapist_id', $therapistId)->latest()->paginate(5);
         } else {
             $patients = Patient::latest()->paginate(5);
         }
