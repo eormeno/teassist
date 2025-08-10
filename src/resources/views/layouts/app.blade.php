@@ -27,11 +27,12 @@
 
         <!-- Page Heading -->
         @if (isset($header))
-            <header class="bg-indigo-800  shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <header class="bg-gradient-to-r from-[#03658C] to-[#7EB0F2] shadow-lg">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-[#F2EBDC] font-bold text-xl">
                     {{ $header }}
                 </div>
             </header>
+
         @endif
 
         <!-- Page Content -->
