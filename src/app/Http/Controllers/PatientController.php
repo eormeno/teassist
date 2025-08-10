@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Patient;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\PatientRequest;
 use Spatie\Permission\Models\Role;
 
@@ -38,15 +41,65 @@ class PatientController extends Controller
     public function store(PatientRequest $request)
     {
         $data = $request->validated();
-        $user = auth()->user();
-        if (auth()->user()->hasRole('root')) {
-            // Asignar terapeuta elegido por el root
-            $data['therapist_id'] = $request->input('therapist_id');
+        $authUser = auth()->user();
+    
+        // Determinar therapist_id
+        if ($authUser->hasRole('root')) {
+            $data['therapist_id'] = $request->input('therapist_id') ?: null;
+        } elseif ($authUser->hasRole('therapist')) {
+            $data['therapist_id'] = $authUser->id;
+        } else {
+            $data['therapist_id'] = null;
         }
-
-        Patient::create($data);
-        return redirect()->route('patients.index');
+    
+        DB::beginTransaction();
+        try {
+            // 1) Si existe un usuario con ese email lo reutilizamos,
+            //    si no existe lo creamos.
+            $user = User::where('email', $data['email'])->first();
+        
+            if ($user) {
+                // Si el user ya está vinculado a otro paciente -> error
+                $existingPatient = Patient::where('user_id', $user->id)->first();
+                if ($existingPatient) {
+                    return redirect()->back()
+                        ->withInput()
+                        ->withErrors(['email' => 'El email indicado ya está asociado a otro paciente.']);
+                }
+            
+                // Asegurar que tenga el rol 'patient'
+                if (! $user->hasRole('patient')) {
+                    $user->assignRole('patient');
+                }
+            } else {
+                // Crear usuario nuevo para el paciente
+                $password = Str::random(10); // contraseña aleatoria (podés notificarla luego)
+                $user = User::create([
+                    'name' => trim(($data['nombres'] ?? '') . ' ' . ($data['apellidos'] ?? '')),
+                    'email' => $data['email'],
+                    'password' => Hash::make($password),
+                ]);
+                $user->assignRole('patient');
+            
+                // (Opcional) acá podrías enviar un email con la contraseña o instrucciones
+            }
+        
+            // 2) Crear el paciente y vincular user_id
+            $patient = new Patient($data); // asigna campos permitidos por $fillable
+            $patient->user_id = $user->id;
+            $patient->save();
+        
+            DB::commit();
+        
+            return redirect()->route('patients.index')->with('success', 'Paciente creado correctamente.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['error' => 'Error al crear paciente: ' . $e->getMessage()]);
+        }
     }
+
 
     public function show(Patient $patient)
     {
