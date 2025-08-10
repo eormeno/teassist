@@ -14,9 +14,9 @@
     <header class=" text-red-400 py-6 shadow-lg ">
         <div class="container mx-auto flex justify-between items-center px-3">
             <img src="{{ asset('images/autis3.jpeg') }}" class="w-50 h-20 float-start" alt="logo">
-            <h1 class="text-4xl font-extrabold">TEASSIST</h1>
+            <h1 class="absolute left-1/2 transform -translate-x-1/2 text-4xl font-extrabold">TEASSIST</h1>
             @if (Route::has('login'))
-                <nav class="flex flex-wrap justify-between items-center space-y-4 lg:space-y-0 lg:space-x-10">
+                <nav class="flex flex-wrap justify-between items-center space-y-4 lg:space-y-0 lg:space-x-3">
                     @auth
                         <a href="{{ url('/dashboard') }}"
                             class="font-extrabold bg-blue-800 text-white rounded-md px-5 py-3 transition hover:bg-blue-500 shadow-md">
