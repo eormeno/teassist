@@ -36,30 +36,52 @@
                     </div>
                 @endrole
                 @role('patient')
-                    <div class="m-4 text-xl text-black">
-                        <b>Usted es un paciente.</b> Puede ver sus actividades designadas.
-                    </div>
                     @php
                         $patient = Auth::user()->patient;
                         $activities = $patient ? $patient->activities : collect();
+                        $therapist = $patient && $patient->therapist ? $patient->therapist : null;
                     @endphp
 
+                    <div class="m-4 text-xl text-black">
+                        <b>Hola {{ $patient->nombres ?? 'Paciente' }}.</b><br>
+                    </div>
+
+                    @if ($therapist)
+                        <div class="m-4 text-lg text-gray-800">
+                            <span>Usted es un paciente de {{$therapist->name ?? 'Terapeuta'}} y puede ver sus actividades designadas.</span>
+                        </div>
+                    @else
+                        <div class="m-4 text-lg text-gray-600">
+                            Por el momento, no tienes terapeuta asignado.
+                        </div>
+                    @endif
+
                     @if ($activities->isEmpty())
-                        <p class="text-gray-600 m-4">No tiene actividades asignadas.</p>
+                        <p class="text-gray-600 m-4">Por el momento no tienes actividades asignadas.</p>
                     @else
                         <div class="m-4">
-                            <h2 class="text-lg font-bold mb-2">Actividades:</h2>
-                            <ul class="list-disc list-inside">
+                            <h2 class="text-lg font-bold mb-4">Actividades:</h2>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                 @foreach ($activities as $activity)
-                                    <li>
-                                        <span class="font-semibold">{{ $activity->description ?? 'Sin titulo' }}</span><br>
-                                        <span class="text-sm text-gray-600">{{ $activity->reasons ?? 'Sin descripción' }}</span>
-                                    </li>
+                                    <div class="bg-[#F2EBDC] border border-[#03658C] rounded-xl shadow-md p-4 hover:shadow-lg transition duration-300">
+                                        <h3 class="text-xl font-bold text-[#03658C] mb-2">
+                                            {{ $activity->description ?? 'Sin título' }}
+                                        </h3>
+                                        <p class="text-gray-700 text-sm mb-3">
+                                            {{ $activity->reasons ?? 'Sin descripción' }}
+                                        </p>
+                                        <span class="inline-block bg-[#7EB0F2] text-white px-3 py-1 rounded-full text-xs">
+                                            Actividad asignada
+                                        </span>
+                                    </div>
                                 @endforeach
-                            </ul>
+                            </div>
                         </div>
                     @endif
                 @endrole
+
+
             </div>
         </div>
     </div>
