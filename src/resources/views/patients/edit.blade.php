@@ -5,85 +5,112 @@
 
     <div class="py-14">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="p-6 sm:px-20 bg-gray-300 border-b border-indigo-300">
-                    <div>
-                        <a href="{{ route('patients.index') }}">
-                            <div class="inline-flex items-center px-4 py-2 mb-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-                                </svg>
-                            </div>
+            <div class="bg-[#F2EBDC] overflow-hidden shadow-lg sm:rounded-lg border border-[#03658C]">
+                <div class="p-6 bg-[#7EB0F2] border-b border-[#03658C] rounded-t-lg">
+                    <div class="mb-6">
+                        <a href="{{ route('patients.index') }}"
+                            class="inline-flex items-center px-4 py-2 bg-[#03658C] hover:bg-[#024B6B] active:bg-[#013946] text-white rounded-md font-semibold text-xs uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#03658C] transition duration-150">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                            </svg>
+                            Volver
                         </a>
                     </div>
-                    <x-validation-errors class="mb-4" />
-                    <form action="{{ route('patients.update', $patient) }}" method="POST">
+    
+                    <x-validation-errors class="mb-4 text-[#F25430]" />
+    
+                    <form action="{{ route('patients.update', $patient) }}" method="POST" class="space-y-6 text-[#03658C]">
                         @csrf
                         @method('PATCH')
-                        <div class="mt-4">
-                            <x-label for="codigo" style="color: #000000;" value="Código" />
-                            <x-input class="border-gray-300 dark:border-gray-700  rounded-md shadow-sm block mt-1 w-full" type="text" name="codigo" value="{{$patient->codigo}}" required/>
+    
+                        <div>
+                            <x-label for="codigo" value="Código" class="text-[#03658C] font-semibold" />
+                            <x-input id="codigo" name="codigo" type="text" value="{{ $patient->codigo }}" required
+                                class="block mt-1 w-full rounded-md border border-[#03658C] px-3 py-2 shadow-sm focus:border-[#024B6B] focus:ring focus:ring-[#024B6B]" />
                         </div>
-                        <div class="mt-4">
-                            <x-label for="apellidos" style="color: #000000;" value="Apellidos" />
-                            <x-input class="border-gray-300 dark:border-gray-700  rounded-md shadow-sm block mt-1 w-full" type="text" name="apellidos" value="{{$patient->apellidos}}" required/>
+    
+                        <div>
+                            <x-label for="apellidos" value="Apellidos" class="text-[#03658C] font-semibold" />
+                            <x-input id="apellidos" name="apellidos" type="text" value="{{ $patient->apellidos }}" required
+                                class="block mt-1 w-full rounded-md border border-[#03658C] px-3 py-2 shadow-sm focus:border-[#024B6B] focus:ring focus:ring-[#024B6B]" />
                         </div>
-                        <div class="mt-4" >
-                            <x-label for="nombres" style="color: #000000;" value="Nombres" />
-                            <x-input class="border-gray-300 dark:border-gray-700  rounded-md shadow-sm block mt-1 w-full" type="text" name="nombres" value="{{$patient->nombres}}" required/>
+    
+                        <div>
+                            <x-label for="nombres" value="Nombres" class="text-[#03658C] font-semibold" />
+                            <x-input id="nombres" name="nombres" type="text" value="{{ $patient->nombres }}" required
+                                class="block mt-1 w-full rounded-md border border-[#03658C] px-3 py-2 shadow-sm focus:border-[#024B6B] focus:ring focus:ring-[#024B6B]" />
                         </div>
-                        <div class="mt-4">
-                            <x-label for="dni" style="color: #000000;" value="DNI" />
-                            <x-input class="border-gray-300 dark:border-gray-700  rounded-md shadow-sm block mt-1 w-full" type="text" name="dni" value="{{$patient->dni}}" required/>
+    
+                        <div>
+                            <x-label for="dni" value="DNI" class="text-[#03658C] font-semibold" />
+                            <x-input id="dni" name="dni" type="text" value="{{ $patient->dni }}" required
+                                class="block mt-1 w-full rounded-md border border-[#03658C] px-3 py-2 shadow-sm focus:border-[#024B6B] focus:ring focus:ring-[#024B6B]" />
                         </div>
-                        <div class="mt-4">
-                            <x-label for="nacimiento" style="color: #000000;" value="Fecha de nacimiento" />
-                            <x-input class="border-gray-300 dark:border-gray-700  rounded-md shadow-sm block mt-1 w-full" type="date" name="nacimiento" value="{{$patient->nacimiento}}" required/>
+    
+                        <div>
+                            <x-label for="nacimiento" value="Fecha de nacimiento" class="text-[#03658C] font-semibold" />
+                            <x-input id="nacimiento" name="nacimiento" type="date" value="{{ $patient->nacimiento }}" required
+                                class="block mt-1 w-full rounded-md border border-[#03658C] px-3 py-2 shadow-sm focus:border-[#024B6B] focus:ring focus:ring-[#024B6B]" />
                         </div>
-                        <div class="mt-4">
-                            <x-label for="sexo"  style="color: #000000;" value="Sexo" />
-                            <select name="sexo" required class="border-gray-300 dark:border-gray-700  rounded-md shadow-sm block mt-1 w-full"
+    
+                        <div>
+                            <x-label for="sexo" value="Sexo" class="text-[#03658C] font-semibold" />
+                            <select name="sexo" id="sexo" required
+                                class="block mt-1 w-full rounded-md border border-[#03658C] px-3 py-2 shadow-sm focus:border-[#024B6B] focus:ring focus:ring-[#024B6B]">
                                 <option value="M" @if ($patient->sexo == 'M') selected @endif>Masculino</option>
                                 <option value="F" @if ($patient->sexo == 'F') selected @endif>Femenino</option>
                             </select>
                         </div>
-                        <div class="mt-4">
-                            <x-label for="telefono" style="color: #000000;" value="Teléfono" />
-                            <x-input class="border-gray-300 dark:border-gray-700  rounded-md shadow-sm block mt-1 w-full" type="text" name="telefono" value="{{$patient->telefono}}" required/>
+    
+                        <div>
+                            <x-label for="telefono" value="Teléfono" class="text-[#03658C] font-semibold" />
+                            <x-input id="telefono" name="telefono" type="text" value="{{ $patient->telefono }}" required
+                                class="block mt-1 w-full rounded-md border border-[#03658C] px-3 py-2 shadow-sm focus:border-[#024B6B] focus:ring focus:ring-[#024B6B]" />
                         </div>
-                        <div class="mt-4">
-                            <x-label for="email" style="color: #000000;" value="Email" />
-                            <x-input class="border-gray-300 dark:border-gray-700  rounded-md shadow-sm block mt-1 w-full" type="email" name="email" value="{{$patient->email}}" required/>
+    
+                        <div>
+                            <x-label for="email" value="Email" class="text-[#03658C] font-semibold" />
+                            <x-input id="email" name="email" type="email" value="{{ $patient->email }}" required
+                                class="block mt-1 w-full rounded-md border border-[#03658C] px-3 py-2 shadow-sm focus:border-[#024B6B] focus:ring focus:ring-[#024B6B]" />
                         </div>
-                        <div class="mt-4">
-                            <x-label for="direccion" style="color: #000000;" value="Dirección" />
-                            <x-input class="border-gray-300 dark:border-gray-700  rounded-md shadow-sm block mt-1 w-full" type="text" name="direccion" value="{{$patient->direccion}}" required/>
+    
+                        <div>
+                            <x-label for="direccion" value="Dirección" class="text-[#03658C] font-semibold" />
+                            <x-input id="direccion" name="direccion" type="text" value="{{ $patient->direccion }}" required
+                                class="block mt-1 w-full rounded-md border border-[#03658C] px-3 py-2 shadow-sm focus:border-[#024B6B] focus:ring focus:ring-[#024B6B]" />
                         </div>
-                        <div class="mt-4">
-                            <x-label for="observaciones" style="color: #000000;" value="Observaciones"/>
-                            <textarea name="observaciones">{{$patient->observaciones}}</textarea>
+    
+                        <div>
+                            <x-label for="observaciones" value="Observaciones" class="text-[#03658C] font-semibold" />
+                            <textarea id="observaciones" name="observaciones" rows="3"
+                                class="block mt-1 w-full rounded-md border border-[#03658C] px-3 py-2 shadow-sm focus:border-[#024B6B] focus:ring focus:ring-[#024B6B]">{{ $patient->observaciones }}</textarea>
                         </div>
+    
                         @role('root')
-                            <div class="mt-4">
-                                <x-label for="therapist_id" style="color: #000000;" value="Terapeuta asignado" />
-                                <select name="therapist_id" id="therapist_id" class="border-gray-300 dark:border-gray-700 rounded-md shadow-sm block mt-1 w-full" required>
+                            <div>
+                                <x-label for="therapist_id" value="Terapeuta asignado" class="text-[#03658C] font-semibold" />
+                                <select name="therapist_id" id="therapist_id" required
+                                    class="block mt-1 w-full rounded-md border border-[#03658C] px-3 py-2 shadow-sm focus:border-[#024B6B] focus:ring focus:ring-[#024B6B] text-black">
                                     <option value="">-- Seleccione un terapeuta --</option>
-                                    @foreach($therapists as $therapist)
-                                        <option value="{{ $therapist->id }}" {{ $patient->therapist_id == $therapist->id ? 'selected' : '' }}>
+                                    @foreach ($therapists as $therapist)
+                                        <option value="{{ $therapist->id }}" @if ($patient->therapist_id == $therapist->id) selected @endif>
                                             {{ $therapist->name }}
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
                         @endrole
-                        <div class="flex items-center justify-end mt-4">
-                            <x-button class="ms-4 py-4 px-6 text-xl" style="background-color: #4f46e5; color: white;" type="submit">
+    
+                        <div class="flex justify-end mt-6">
+                            <button type="submit"
+                                class="px-8 py-3 bg-[#03658C] hover:bg-[#024B6B] active:bg-[#013946] text-white font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#03658C] transition duration-150">
                                 Editar Paciente
-                            </x-button>                            
-                        </div>                        
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
 </x-crud-layout>

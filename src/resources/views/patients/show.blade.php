@@ -5,96 +5,61 @@
 
     <div class="py-14">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="p-6 sm:px-20 bg-gray-300 border-b border-indigo-300">
-                    <div class="row">
-                        <div class="col-lg-12 margin-tb mb-4">
-                            <div>
-                                <a href="{{ route('patients.index') }}">
-                                    <div class="inline-flex items-center px-4 py-2 mb-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-                                        </svg>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+            <div class="bg-[#F2EBDC] overflow-hidden shadow-lg sm:rounded-lg border border-[#03658C]">
+                <div class="p-6 bg-[#7EB0F2] border-b border-[#03658C] rounded-t-lg">
+                    <div class="mb-6">
+                        <a href="{{ route('patients.index') }}"
+                            class="inline-flex items-center px-4 py-2 bg-[#03658C] hover:bg-[#024B6B] active:bg-[#013946] text-white rounded-md font-semibold text-xs uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#03658C] transition duration-150">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                            </svg>
+                            Volver
+                        </a>
                     </div>
 
-                    <div class="row">
-                        <div class="col-xs-12 mb-3">
-                            <div class="form-group">
-                                <strong>Codigo:</strong>
-                                {{ $patient->codigo }}
-                            </div>
+                    <div class="space-y-4 text-black text-sm">
+                        <div>
+                            <strong class="font-semibold">Código:</strong> {{ $patient->codigo }}
                         </div>
-                        <div class="col-xs-12 mb-3">
-                            <div class="form-group">
-                                <strong>Apellidos:</strong>
-                                {{ $patient->apellidos }}
-                            </div>
+                        <div>
+                            <strong class="font-semibold">Apellidos:</strong> {{ $patient->apellidos }}
                         </div>
-                        <div class="col-xs-12 mb-3">
-                            <div class="form-group">
-                                <strong>Nombres:</strong>
-                                {{ $patient->nombres }}
-                            </div>
+                        <div>
+                            <strong class="font-semibold">Nombres:</strong> {{ $patient->nombres }}
                         </div>
-                        <div class="col-xs-12 mb-3">
-                            <div class="form-group">
-                                <strong>Dni:</strong>
-                                {{ $patient->dni }}
-                            </div>
+                        <div>
+                            <strong class="font-semibold">DNI:</strong> {{ $patient->dni }}
                         </div>
-                        <div class="col-xs-12 mb-3">
-                            <div class="form-group">
-                                <strong>Fecha de nacimiento:</strong>
-                                {{ $patient->nacimiento }}
-                            </div>
+                        <div>
+                            <strong class="font-semibold">Fecha de nacimiento:</strong> {{ $patient->nacimiento }}
                         </div>
-                        <div class="col-xs-12 mb-3">
-                            <div class="form-group">
-                                <strong>Sexo:</strong>
-                                {{ $patient->sexo }}
-                            </div>
+                        <div>
+                            <strong class="font-semibold">Sexo:</strong> {{ $patient->sexo }}
                         </div>
-                        <div class="col-xs-12 mb-3">
-                            <div class="form-group">
-                                <strong>Teléfono:</strong>
-                                {{ $patient->telefono }}
-                            </div>
+                        <div>
+                            <strong class="font-semibold">Teléfono:</strong> {{ $patient->telefono }}
                         </div>
-                        <div class="col-xs-12 mb-3">
-                            <div class="form-group">
-                                <strong>Email:</strong>
-                                {{ $patient->email }}
-                            </div>
+                        <div>
+                            <strong class="font-semibold">Email:</strong> {{ $patient->email }}
                         </div>
-                        <div class="col-xs-12 mb-3">
-                            <div class="form-group">
-                                <strong>Direccion:</strong>
-                                {{ $patient->direccion }}
-                            </div>
+                        <div>
+                            <strong class="font-semibold">Dirección:</strong> {{ $patient->direccion }}
                         </div>
-                        <div class="col-xs-12 mb-3">
-                            <div class="form-group">
-                                <strong>Observaciones:</strong>
-                                {{ $patient->observaciones }}
-                            </div>
-                        </div>                    
-                        <div class="col-xs-12 mb-3">
-                            <div class="form-group">
-                                <strong>Terapeuta:</strong>
-                                @if($patient->therapist)
-                                    {{ $patient->therapist->name }}
-                                @else
-                                    <em>No asignado</em>
-                                @endif                                
-                            </div>
-                        </div>                         
+                        <div>
+                            <strong class="font-semibold">Observaciones:</strong> {{ $patient->observaciones }}
+                        </div>
+                        <div>
+                            <strong class="font-semibold">Terapeuta:</strong>
+                            @if($patient->therapist)
+                                {{ $patient->therapist->name }}
+                            @else
+                                <em class="text-[#7EB0F2]">No asignado</em>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </x-crud-layout>
